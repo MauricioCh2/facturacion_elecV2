@@ -1,0 +1,96 @@
+<div class="col-md-6 offset-md-3">
+  <h3 class = "text-center"> Registro </h3>
+  <form (ngSubmit)="onSubmit()" #usuarioForm = "ngForm" class = "row g-2">
+    <div class="col-md-6">
+      <label for="idUsuario" class="etiqueta">Cedula:</label>
+      <input type="text"
+             class="form-control"
+             id="idUsuario"
+             name="idUsuario"
+             [(ngModel)]="usuario.idUsuario"
+             minlength="3"
+             maxlength="12"
+             placeholder="Digite su cedula"
+             #idUsuario = "ngModel"
+      >
+      <div class = "alert alert-danger" *ngIf="idUsuario.invalid && (idUsuario.dirty || idUsuario.touched)">
+        <div *ngIf="idUsuario.errors['required']">
+          El id es requerido
+        </div>
+        <div *ngIf="idUsuario.errors['minlength']">
+          El id debe tener al menos 3 caracteres
+        </div>
+        <div *ngIf="idUsuario.errors['maxlength']">
+          El id debe tener menos de 12 caracteres
+        </div>
+      </div>
+    </div>
+
+      <div class="col-md-6">
+        <label for="tipoCedula" class="form-label">Tipo de Cédula:</label>
+        <select class="form-select" id="tipoCedula" name="tipoCedula" [(ngModel)]="usuario.tipoCedula">
+          <option selected >Elegir</option>
+          <option value="FIS">Físico</option>
+          <option value="JUR">Jurídico</option>
+        </select>
+      </div>
+
+
+
+    <div class="form-group">
+      <label for="nombre" class="etiqueta">Nombre:</label>
+      <input type="text"
+             class="form-control"
+             id="nombre"
+             name="nombre"
+             [(ngModel)]="usuario.nombre"
+             required
+             minlength="3"
+             maxlength="80"
+             placeholder="Digite su nombre"
+             #nombre = "ngModel"
+      >
+      <!--      Si esll nombre esta sucio, es invalido-->
+      <div class = "alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+        <div *ngIf="nombre.errors['required']">
+          El campo es requerido
+        </div>
+        <div *ngIf="nombre.errors['minlength']">
+          El campo debe tener al menos 3 caracteres
+        </div>
+        <div *ngIf="nombre.errors['maxlength']">
+          El campo debe tener menos de 80 caracteres
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="form-group">
+      <label for="contrasena" class="etiqueta">Contraseña:</label>
+      <input type="password"
+             class="form-control"
+             id="contrasena"
+             name="contrasena"
+             required
+             minlength="8"
+             [(ngModel)]="usuario.contrasenia"
+             #contrasena = "ngModel"
+      >
+      <div class = "alert alert-danger" *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)">
+        <div *ngIf="contrasena.errors['required']">
+          El campo es requerido
+        </div>
+        <div *ngIf="contrasena.errors['minlength']">
+          La contraseña debe tener al menos 8 caracteres
+        </div>
+      </div>
+    </div>
+
+
+    <button class="btn btn-success" [disabled]="!usuarioForm.form.valid" >Guardar</button>
+  </form>
+
+</div>

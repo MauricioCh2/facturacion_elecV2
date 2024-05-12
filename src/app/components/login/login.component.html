@@ -1,0 +1,49 @@
+<div class="col-md-6 offset-md-3 d-flex justify-content-center align-items-center">
+  <div class="login-container border p-3">
+    <h3 class = "text-center"> Login </h3>
+  <div class="col-md-6">
+    <form (ngSubmit)="onSubmit()" #usuarioForm = "ngForm" >
+      <div>
+        <label for="idProveedor" >Identificacion:</label>
+        <input type="text"
+               id="idProveedor"
+               name="idProveedor"
+               placeholder="Enter your username"
+               [(ngModel)]="usuario.idUsuario"
+               #idUsuario = "ngModel"
+               required
+        >
+        <br><br>
+      </div>
+
+      <div class="alert alert-danger" *ngIf="submitAttempted && idUsuario.invalid">
+      <div *ngIf="idUsuario.errors['required']">
+        El id es requerido
+      </div>
+    </div>
+      <div>
+      <label for="contrasena"  >Password:</label>
+      <input type="password"
+             id="contrasena"
+             name="contrasena"
+             placeholder="Enter your password"
+             [(ngModel)]="usuario.contrasenia"
+              #contrasena = "ngModel"
+             required
+      ><br><br>
+      </div>
+      <div class="alert alert-danger" *ngIf="submitAttempted && contrasena.invalid">
+        <div *ngIf="contrasena.errors['required']">
+          La contraseña es requerida
+        </div>
+      </div>
+
+      <button type="submit" value="Login" class="btn btn-primary">Login   </button>
+      <div *ngIf="error" class="error">{{error}}</div>
+
+    </form>
+    <div class="registerlink" >
+      <p> No tienes una cuenta? <a routerLink="/registrar-usuario">Registrate!</a></p>
+    </div>
+  </div>
+  </div>

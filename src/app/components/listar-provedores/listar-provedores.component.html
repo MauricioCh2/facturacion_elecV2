@@ -1,0 +1,36 @@
+<h2> Lista proveedores</h2>
+<table class="table table-striped">
+  <thead class= "table-dark">
+  <tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Rol</th>
+    <th>Fisico o Juridico</th>
+    <th>Aprobado</th>
+    <th>DEBUGEO</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let prov of proveedores">
+    <td>{{prov.idUsuario}}</td>
+    <td>{{prov.nombre}}</td>
+    <td>{{prov.tipo}}</td>
+    <td>{{prov.tipoCedula }}</td>
+    <td>
+      <select [(ngModel)]="prov.aprobado">
+        <option [value]="true">Aprobado</option>
+        <option [value]="false">Denegado</option>
+      </select>
+      <button (click)="guardarAprobacion(prov)">Guardar</button>
+
+    </td>
+    <td>
+      <button class="btn btn-info" (click)="actualizarUsuario(prov.idUsuario)">Editar</button>
+      <button class="btn btn-danger" style="margin-left: 10px " (click)="eliminarUsuario(prov.idUsuario)">Eliminar</button>
+<!--      <button class="btn btn-primary" style="margin-left: 10px " (click)="verDetallesUsuario(usuario.idUsuario)">Ver detalles</button>-->
+    </td>
+  </tr>
+  </tbody>
+
+</table>
+
