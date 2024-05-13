@@ -1,10 +1,98 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a routerLink="login" routerLinkActive="active" class="nav-link" >login</a>
-    </li>
-    <li class="nav-item">
-      <a routerLink="registrar-usuario" routerLinkActive="active" class="nav-link" >Añadir proveedores</a>
-    </li>
-  </ul>
+
+<nav class="navbar   bg-primary navbar-dark ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Facturacion electronica</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+  </div>
 </nav>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Dropdown
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </li>
+    </ul>
+    <form class="d-flex mt-3" role="search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</div>
+
+<!--<div class="canvas collapse justify-content-between" id="infonavBar" data-bs-theme="dark" data-bs-scroll="true" tabindex="-1" >-->
+<!--  <div class="bg-dark p-4">-->
+<!--    <button type="button" class="btn-close" data-bs-dismiss="infonavBar" aria-label="Close"></button>-->
+<!--    <h5 class="text-body-emphasis h4">Aqui por defecto estara un componente que lpermita ver detalles</h5>-->
+<!--    <span class="text-body-secondary">link a editar</span>-->
+<!--    <span class="text-body-secondary">link a logout</span>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<nav class="navbar navbar-expand-sm bg-primary navbar-dark">-->
+
+<!--  <div class="container-fluid">-->
+<!--    <a class="navbar-brand" href="#">-->
+<!--      <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="20" height="24" class="d-inline-block align-text-top rounded-circle">-->
+<!--      Facturacion electronica-->
+<!--    </a>-->
+<!--  </div>-->
+
+<!--  <h2 class="visually-hidden">Title for screen readers</h2>-->
+<!--  <a class="visually-hidden-focusable" href="#content">Skip to main content</a>-->
+<!--  <div class="visually-hidden-focusable">A container with a <a href="#">focusable element</a>.</div>-->
+
+
+
+<!--  <ul class="navbar-nav justify-content-center nav-underline nav-pills nav-fill">-->
+<!--    <li class="nav-item">-->
+<!--      <a routerLink="login" routerLinkActive="active" class="nav-link" >login</a>-->
+<!--    </li>-->
+<!--    <li class="nav-item">-->
+<!--      <a routerLink="registrar-usuario" routerLinkActive="active" class="nav-link" >Añadir proveedores</a>-->
+<!--    </li>-->
+<!--  </ul>-->
+
+
+<!--&lt;!&ndash;  <div class="btn-group dropstart" role="group">&ndash;&gt;-->
+<!--&lt;!&ndash;    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">&ndash;&gt;-->
+<!--&lt;!&ndash;   Dropdown&ndash;&gt;-->
+<!--&lt;!&ndash;    </button>&ndash;&gt;-->
+<!--&lt;!&ndash;    <ul class="dropdown-menu">&ndash;&gt;-->
+<!--&lt;!&ndash;      <li><button class="dropdown-item" type="button">Detalles</button></li>&ndash;&gt;-->
+<!--&lt;!&ndash;      <li><button class="dropdown-item" type="button">Logout</button></li>&ndash;&gt;-->
+<!--&lt;!&ndash;    </ul>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+
+<!--  <div class="container-fluid d-flex justify-content-end">-->
+<!--    <button class="navbar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#infonavBar" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--      <span class="navbar-toggle-icon"></span>-->
+<!--    </button>-->
+<!--  </div>-->
+
+<!--</nav>-->
+

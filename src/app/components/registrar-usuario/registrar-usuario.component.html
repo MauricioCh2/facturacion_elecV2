@@ -1,10 +1,10 @@
 <div class="col-md-6 offset-md-3">
   <h3 class = "text-center"> Registro </h3>
-  <form (ngSubmit)="onSubmit()" #usuarioForm = "ngForm" class = "row g-2">
-    <div class="col-md-6">
-      <label for="idUsuario" class="etiqueta">Cedula:</label>
+  <form (ngSubmit)="onSubmit()" #usuarioForm = "ngForm" class = "row g-3">
+    <label for="idUsuario" class="form-label">Cedula:</label>
+    <div class="col-md-6 input-group">
       <input type="text"
-             class="form-control"
+             class="form-control "
              id="idUsuario"
              name="idUsuario"
              [(ngModel)]="usuario.idUsuario"
@@ -13,8 +13,18 @@
              placeholder="Digite su cedula"
              #idUsuario = "ngModel"
       >
-      <div class = "alert alert-danger" *ngIf="idUsuario.invalid && (idUsuario.dirty || idUsuario.touched)">
-        <div *ngIf="idUsuario.errors['required']">
+    <div class="col-md-1">
+      <label for="tipo" class="input-group-text" >Tipo</label>
+    </div>
+    <div class="col-md-3">
+      <select class="form-select" id="tipo" name="tipoCedula" [(ngModel)]="usuario.tipoCedula">
+        <option value="FIS">Físico</option>
+        <option value="JUR">Jurídico</option>
+      </select>
+    </div>
+    </div>
+      <div class = "alert alert-danger d-flex align-items-center" role = "alert"*ngIf="idUsuario.invalid && (idUsuario.dirty || idUsuario.touched)">
+        <div  *ngIf="idUsuario.errors['required']" >
           El id es requerido
         </div>
         <div *ngIf="idUsuario.errors['minlength']">
@@ -23,16 +33,6 @@
         <div *ngIf="idUsuario.errors['maxlength']">
           El id debe tener menos de 12 caracteres
         </div>
-      </div>
-    </div>
-
-      <div class="col-md-6">
-        <label for="tipoCedula" class="form-label">Tipo de Cédula:</label>
-        <select class="form-select" id="tipoCedula" name="tipoCedula" [(ngModel)]="usuario.tipoCedula">
-          <option selected >Elegir</option>
-          <option value="FIS">Físico</option>
-          <option value="JUR">Jurídico</option>
-        </select>
       </div>
 
 

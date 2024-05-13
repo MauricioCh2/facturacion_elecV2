@@ -17,12 +17,13 @@
     <td>{{prov.tipo}}</td>
     <td>{{prov.tipoCedula }}</td>
     <td>
-      <select class="form-select" [(ngModel)]="prov.aprobado">
-        <option [value]="true">Aprobado</option>
-        <option [value]="false">Denegado</option>
-      </select>
-      <button class = "btn btn-info" (click)="guardarAprobacion(prov)">Guardar</button>
-
+      <div class = "input-group">
+        <select class="form-select form-select-m" [(ngModel)]="prov.aprobado">
+          <option [value]="true">Aprobado</option>
+          <option [value]="false">Denegado</option>
+        </select>
+        <button class = "btn btn-outline-secondary" (click)="guardarAprobacion(prov)">Guardar</button>
+      </div>
     </td>
     <td>
       <button class="btn btn-info" (click)="actualizarUsuario(prov.idUsuario)">Editar</button>

@@ -6,9 +6,9 @@ import {LoginComponent} from "./components/login/login.component";
 import {FacturacionComponent} from "./components/facturacion/facturacion.component";
 
 const routes: Routes = [
+  {path : '', redirectTo: 'login', pathMatch: 'full'} ,//si esta vacio retorna a usuarios, CAMBIAR A ALOGIN
   {path : 'proveedores', component: ListarProvedoresComponent},
   {path : 'login', component: LoginComponent},
-  {path : '', redirectTo: 'login', pathMatch: 'full'} ,//si esta vacio retorna a usuarios, CAMBIAR A ALOGIN
   {path : 'registrar-usuario', component: RegistrarUsuarioComponent},
   {path : 'facturación', component: FacturacionComponent}
 
