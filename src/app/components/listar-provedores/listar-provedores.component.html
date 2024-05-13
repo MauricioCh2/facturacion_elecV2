@@ -17,11 +17,11 @@
     <td>{{prov.tipo}}</td>
     <td>{{prov.tipoCedula }}</td>
     <td>
-      <select [(ngModel)]="prov.aprobado">
+      <select class="form-select" [(ngModel)]="prov.aprobado">
         <option [value]="true">Aprobado</option>
         <option [value]="false">Denegado</option>
       </select>
-      <button (click)="guardarAprobacion(prov)">Guardar</button>
+      <button class = "btn btn-info" (click)="guardarAprobacion(prov)">Guardar</button>
 
     </td>
     <td>
