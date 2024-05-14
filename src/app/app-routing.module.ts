@@ -8,20 +8,21 @@ import {AcercaDeComponent} from "./components/acerca-de/acerca-de.component";
 import {AddClienteComponent} from "./components/clientes/add-cliente/add-cliente.component";
 import {ListarClientesComponent} from "./components/clientes/listar-clientes/listar-clientes.component";
 import {AddProductoComponent} from "./components/productos/add-producto/add-producto.component";
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   {path : '', redirectTo: 'login', pathMatch: 'full'} ,//si esta vacio retorna a usuarios, CAMBIAR A ALOGIN
   {path : 'login', component: LoginComponent},
   {path : 'acerca-de', component: AcercaDeComponent},
-  {path : 'proveedores', component: ListarProvedoresComponent},
-  {path : 'registrar-usuario', component: RegistrarUsuarioComponent},
-  {path : 'facturacion', component: FacturacionComponent},
+  {path : 'registrar-usuario', component: RegistrarUsuarioComponent,  },
+  {path : 'proveedores', component: ListarProvedoresComponent, canActivate: [AuthGuardService] },
+  {path : 'facturacion', component: FacturacionComponent, canActivate: [AuthGuardService] },
 
-  {path : 'add-cliente', component: AddClienteComponent},
-  {path : 'clientes', component: ListarClientesComponent},
-  {path : 'add-producto', component: AddProductoComponent},
-  {path : 'productos', component: ListarProvedoresComponent},
-  {path : 'facturas', component: FacturacionComponent},
+  {path : 'add-cliente', component: AddClienteComponent, canActivate: [AuthGuardService] },
+  {path : 'clientes', component: ListarClientesComponent, canActivate: [AuthGuardService] },
+  {path : 'add-producto', component: AddProductoComponent, canActivate: [AuthGuardService] },
+  {path : 'productos', component: ListarProvedoresComponent, canActivate: [AuthGuardService] },
+  {path : 'facturas', component: FacturacionComponent, canActivate: [AuthGuardService] },
 
 
 ];

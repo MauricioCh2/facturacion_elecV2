@@ -22,7 +22,7 @@ export class CanvasUsuarioComponent {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si , elimínalo',
+      confirmButtonText: 'Si , cerrar sesion',
       cancelButtonText: 'No, cancelar',
       confirmButtonClass: 'btn btn-success',
       cancelButtonClass: 'btn btn-danger',

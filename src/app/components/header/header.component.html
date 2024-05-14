@@ -11,7 +11,9 @@
         </li>
         <div class="vr"></div>
 
-        <li class="nav-item dropdown" >
+<!--        Los siguientes elementos solo apareceran cuando sean usuarios y en ciertos casos cuando sean provedores-->
+<!--        #elementoAOculatr señala a el service de este componente que lo oculte-->
+        <li class="nav-item dropdown" #elementosAOcultar *ngIf="currentUserService.getTipo() === 'PRO'">
           <div class="btn-group btn-group-hover" data-bs-hover="dropdown">
             <a class="nav-link dropdown-toggle dropdown-toggle-split" aria-expanded="false" routerLink="clientes" routerLinkActive="active">Clientes</a>
             <ul class="dropdown-menu">
@@ -21,7 +23,7 @@
           </div>
         </li>
 
-        <li class="nav-item dropdown" >
+        <li class="nav-item dropdown" #elementosAOcultar *ngIf="currentUserService.getTipo() === 'PRO'">
           <div class="btn-group btn-group-hover" data-bs-hover="dropdown">
             <a class="nav-link dropdown-toggle dropdown-toggle-split" aria-expanded="false" routerLink="productos" routerLinkActive="active">Productos</a>
             <ul class="dropdown-menu">
@@ -31,15 +33,15 @@
           </div>
         </li>
 
-        <li class="nav-item" >
-          <a class="nav-link" routerLink="facturas" routerLinkActive="active">Faturas</a>
+        <li class="nav-item" #elementosAOcultar>
+          <a class="nav-link" routerLink="facturas" routerLinkActive="active" *ngIf="currentUserService.getTipo() === 'PRO'">Faturas</a>
         </li>
 
       </ul>
     </div>
 
     <!-- Botón para desplegar el canvas con la información del usuario -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasUsuario" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+    <button #elementosAOcultar class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasUsuario" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   </div>
