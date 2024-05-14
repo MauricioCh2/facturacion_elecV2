@@ -53,7 +53,7 @@ export class LoginComponent {
       if (usuarioAux.tipo == 'ADM') { //podria enviar por qui el id, pero preferi hacer lo de curreent, creo que es mejor
         this.router.navigate(['/proveedores']);
       } else {
-        this.router.navigate(['/facturación']);
+        this.router.navigate(['/facturacion']);
       }
     });
   }

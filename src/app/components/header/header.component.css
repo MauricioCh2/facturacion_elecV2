@@ -1,0 +1,16 @@
+.nav-bar-custom{
+  background-color: lightblue;
+  color: white;
+}
+.nav-bar-custom .nav-link {
+  color: #e8995c; /* Reemplaza #TU-COLOR-DESEADO con el código hexadecimal del color que desees */
+}
+.btn-group-hover:hover .dropdown-menu {
+  display: block;
+  transform: translateY(40%);
+}
+
+.dropdown-menu {
+  position: absolute;
+  z-index: 1000;
+}
