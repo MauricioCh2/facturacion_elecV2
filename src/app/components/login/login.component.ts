@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Usuario} from "../../entities/usuario";
 import {UsuarioService} from "../../services/usuario.service";
 import {Router} from "@angular/router";
 import {CurrentUserService} from "../../services/current-user.service";
+import {colorConsole} from "../../color-console";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent  implements  OnInit{
 
   usuario : Usuario = new Usuario();
   submitAttempted = false;
@@ -18,6 +19,13 @@ export class LoginComponent {
   protected error: string;
   constructor(private usuarioService : UsuarioService, private router:Router, private currentUserService: CurrentUserService){
   }
+
+  ngOnInit(): void {
+    console.log( colorConsole.RED + "Esta logeado alguien? " +this.currentUserService.isUserLogged());
+
+    this.currentUserService.resetCurrent();
+
+    }
 
   login(){
     this.usuarioService.login(this.usuario).subscribe(dato =>{
@@ -35,6 +43,8 @@ export class LoginComponent {
   }
 
   onSubmit(){
+    console.log( colorConsole.RED + "Esta logeado alguien? " +this.currentUserService.isUserLogged());
+
     this.submitAttempted = true;
     console.log(this.usuario);
 

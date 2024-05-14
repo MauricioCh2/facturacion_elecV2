@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import {UsuarioService} from "../../services/usuario.service";
 import {Router} from "@angular/router";
 import {CurrentUserService} from "../../services/current-user.service";
-import  swal  from 'sweetalert2';
+import  swal  from 'sweetalert2'; //permite alertas
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-canvas-usuario',
@@ -11,11 +12,13 @@ import  swal  from 'sweetalert2';
 })
 export class CanvasUsuarioComponent {
 
-  constructor(private router:Router, private currentUserService: CurrentUserService){
-  }
+  //Router para redireciones, NgbModal para poder cerrar el offCanva cuando se desloguee
+  constructor(private router:Router, private currentUserService: CurrentUserService, private modalService: NgbModal) { }
+
 
   logout(){
-    swal({
+
+    swal({//popup para decirle al usuario si realmentre queire salir con la libreria sweetalert
       title: '¿Estas seguro?',
       text: "Confirma si deseas cerrar sesion",
       type: 'warning',
@@ -30,6 +33,7 @@ export class CanvasUsuarioComponent {
     }).then((result) => {
       if (result.value) {
         this.currentUserService.logout();
+        this.modalService.dismissAll(); // cierra todos los modales/offcanvas abiertos
         this.router.navigate(['/login']);
           swal(
             'Salio correctamente',
@@ -44,4 +48,6 @@ export class CanvasUsuarioComponent {
   actualizarUsuario() {
     this.router.navigate(['actualizar-usuario', this.currentUserService.getCurrentUser().idUsuario]);
   }
+
+
 }

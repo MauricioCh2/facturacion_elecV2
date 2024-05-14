@@ -14,12 +14,20 @@ export class CurrentUserService {
     this.checkUserSession();
   }
 
-  private checkUserSession() {
+  private checkUserSession() { //verifica la sesion del usuario, si hay y si esta vacio
     if (typeof window !== 'undefined') {
       const user = localStorage.getItem('currentUser');
       if (user) {
-        this.currentUser = JSON.parse(user);
-        this.authStatusSource.next(true);
+        const parsedUser = JSON.parse(user);
+        // Verifica si el usuario tiene un nombre válido
+        if (parsedUser.nombre && parsedUser.nombre.trim().length > 0) {
+          this.currentUser = parsedUser;
+          this.authStatusSource.next(true);
+        } else {
+          // El usuario no tiene un nombre válido, manejar este caso
+          console.error('El usuario en el almacenamiento local no tiene un nombre válido');
+          this.logout(); // Puedes optar por cerrar la sesión o hacer algo más
+        }
       } else {
         this.authStatusSource.next(false);
       }
@@ -52,7 +60,14 @@ export class CurrentUserService {
   }
 
   public getTipo() {
+    if (!this.currentUser) {
+      return "";
+    }
     return this.currentUser.tipo;
+  }
+  public resetCurrent(){
+    this.currentUser = null;
+    this.logout();
   }
 
 }
