@@ -1,10 +1,114 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a routerLink="login" routerLinkActive="active" class="nav-link" >login</a>
-    </li>
-    <li class="nav-item">
-      <a routerLink="registrar-usuario" routerLinkActive="active" class="nav-link" >Añadir proveedores</a>
-    </li>
-  </ul>
+<nav class="navbar navbar-dark navbar-dark nav-bar-custom">
+  <div class="container-fluid">
+    <a class="navbar-brand" appAuthCurrent [defaultRoute]="'/login'">
+      <img src="assets/images/headerLogo.jpg" width="65" height="65" alt="Logo" class="d-inline-block scale align-text-top rounded-circle">
+    </a>
+
+    <div>
+      <ul class="nav justify-content-center nav-underline">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="acerca-de" routerLinkActive="active">Acerca De</a>
+        </li>
+        <div class="vr"></div>
+
+<!--        Los siguientes elementos solo apareceran cuando sean usuarios y en ciertos casos cuando sean provedores-->
+<!--        #elementoAOculatr señala a el service de este componente que lo oculte-->
+        <li class="nav-item dropdown" #elementosAOcultar *ngIf="currentUserService.getTipo() === 'PRO'">
+          <div class="btn-group btn-group-hover" data-bs-hover="dropdown">
+            <a class="nav-link dropdown-toggle dropdown-toggle-split" aria-expanded="false" routerLink="clientes" routerLinkActive="active">Clientes</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="add-cliente">Añadir clientes</a></li>
+              <li><a class="dropdown-item" routerLink="clientes">Ver lista de clientes</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown" #elementosAOcultar *ngIf="currentUserService.getTipo() === 'PRO'">
+          <div class="btn-group btn-group-hover" data-bs-hover="dropdown">
+            <a class="nav-link dropdown-toggle dropdown-toggle-split" aria-expanded="false" routerLink="productos" routerLinkActive="active">Productos</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="add-producto">Añadir productos</a></li>
+              <li><a class="dropdown-item" routerLink="productos">Ver lista de productos</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown" #elementosAOcultar *ngIf="currentUserService.getTipo() === 'PRO'">
+          <div class="btn-group btn-group-hover" data-bs-hover="dropdown">
+            <a class="nav-link dropdown-toggle dropdown-toggle-split" routerLink="facturacion" routerLinkActive="active" >Faturas</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="facturacion">Facturar</a></li>
+              <li><a class="dropdown-item" routerLink="facturas">Historial de facturas</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item" #elementosAOcultar>
+        </li>
+
+      </ul>
+    </div>
+
+    <!-- Botón para desplegar el canvas con la información del usuario -->
+    <button #elementosAOcultar class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasUsuario" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
 </nav>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="canvasUsuario" aria-labelledby="offcanvasNavbarLabel">
+  <app-canvas-usuario></app-canvas-usuario>
+</div>
+
+<!--<div class="canvas collapse justify-content-between" id="infonavBar" data-bs-theme="dark" data-bs-scroll="true" tabindex="-1" >-->
+<!--  <div class="bg-dark p-4">-->
+<!--    <button type="button" class="btn-close" data-bs-dismiss="infonavBar" aria-label="Close"></button>-->
+<!--    <h5 class="text-body-emphasis h4">Aqui por defecto estara un componente que lpermita ver detalles</h5>-->
+<!--    <span class="text-body-secondary">link a editar</span>-->
+<!--    <span class="text-body-secondary">link a logout</span>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<nav class="navbar navbar-expand-sm bg-primary navbar-dark">-->
+
+<!--  <div class="container-fluid">-->
+<!--    <a class="navbar-brand" href="#">-->
+<!--      <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="20" height="24" class="d-inline-block align-text-top rounded-circle">-->
+<!--      Facturacion electronica-->
+<!--    </a>-->
+<!--  </div>-->
+
+<!--  <h2 class="visually-hidden">Title for screen readers</h2>-->
+<!--  <a class="visually-hidden-focusable" href="#content">Skip to main content</a>-->
+<!--  <div class="visually-hidden-focusable">A container with a <a href="#">focusable element</a>.</div>-->
+
+
+
+<!--  <ul class="navbar-nav justify-content-center nav-underline nav-pills nav-fill">-->
+<!--    <li class="nav-item">-->
+<!--      <a routerLink="login" routerLinkActive="active" class="nav-link" >login</a>-->
+<!--    </li>-->
+<!--    <li class="nav-item">-->
+<!--      <a routerLink="registrar-usuario" routerLinkActive="active" class="nav-link" >Añadir proveedores</a>-->
+<!--    </li>-->
+<!--  </ul>-->
+
+
+<!--&lt;!&ndash;  <div class="btn-group dropstart" role="group">&ndash;&gt;-->
+<!--&lt;!&ndash;    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">&ndash;&gt;-->
+<!--&lt;!&ndash;   Dropdown&ndash;&gt;-->
+<!--&lt;!&ndash;    </button>&ndash;&gt;-->
+<!--&lt;!&ndash;    <ul class="dropdown-menu">&ndash;&gt;-->
+<!--&lt;!&ndash;      <li><button class="dropdown-item" type="button">Detalles</button></li>&ndash;&gt;-->
+<!--&lt;!&ndash;      <li><button class="dropdown-item" type="button">Logout</button></li>&ndash;&gt;-->
+<!--&lt;!&ndash;    </ul>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+
+<!--  <div class="container-fluid d-flex justify-content-end">-->
+<!--    <button class="navbar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#infonavBar" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--      <span class="navbar-toggle-icon"></span>-->
+<!--    </button>-->
+<!--  </div>-->
+
+<!--</nav>-->
+

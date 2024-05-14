@@ -30,6 +30,7 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
     //--------------------strict--------------------
+    //Otras configuraciones para poder validar de manera mas comoda los errores
     "strictFunctionTypes": false,
     "strictBindCallApply": false,
     "strictPropertyInitialization": false,

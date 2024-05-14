@@ -1,0 +1,93 @@
+<div class="col-md-6 offset-md-3 d-flex justify-content-center align-items-center ">
+  <div class="form-container border p-3 d-flex flex-column justify-content-center align-items-center">
+    <h3 class="text-center">Facturacion</h3>
+    <form>
+      <table>
+        <!--        luego le cambio el color-->
+        <thead class= "table-dark">
+        <tr class = "text-align-center">
+          <th>Proveedor: {{getName()}}</th>
+        </tr>
+        </thead>
+        <tbody>
+<!--        Espacio de  seleccion cliente-->
+        <tr>
+          <div class="input-group mb-3">
+            <p>Cliente: </p>
+            <input type="text"
+                   class="form-control"
+                   aria-label="Text input with dropdown button"
+                    required
+            >
+            <!--#idCliente = "ngModel"-->
+            <!--                  [(ngModel)] = "idCliente"-->
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#">Poner la lista de clientes aso</a></li>
+              <li><hr class="dropdown-divider"></li>
+            </ul>
+            <button class = "btn btn-outline-secondary "> L </button>
+<!--            <div class = "alert alert-danger d-flex align-items-center" role = "alert"*ngIf="idUsuario.invalid && (idUsuario.dirty || idUsuario.touched)">-->
+<!--              <div  *ngIf="idUsuario.errors['required']" >-->
+<!--                El id es requerido-->
+<!--              </div>-->
+<!--            </div>-->
+          </div>
+        </tr>
+<!--        Espacio de seleccion de Productos-->
+        <tr>
+          <div class="input-group mb-3">
+            <p>Producto: </p>
+            <input type="text"
+                   class="form-control"
+                   aria-label="Text input with dropdown button"
+                   required
+            >
+            <!--#idCliente = "ngModel"-->
+            <!--                  [(ngModel)] = "idCliente"-->
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#">Poner la lista de productos aso</a></li>
+              <li><hr class="dropdown-divider"></li>
+            </ul>
+            <button class = "btn btn-outline-secondary "> L </button>
+            <button class = "btn btn-outline-secondary "> + </button>
+            <!--            <div class = "alert alert-danger d-flex align-items-center" role = "alert"*ngIf="idUsuario.invalid && (idUsuario.dirty || idUsuario.touched)">-->
+            <!--              <div  *ngIf="idUsuario.errors['required']" >-->
+            <!--                El id es requerido-->
+            <!--              </div>-->
+            <!--            </div>-->
+          </div>
+        </tr>
+        <tr>
+          <table>
+            <thead class= "table-dark">
+            <tr>
+              <th>Codigo</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Descripcion</th>
+              <th>Cantidad</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+          <p>Monto:</p>
+<!--          aqui iria el monto final-->
+        </tr>
+
+        </tbody>
+
+        <tr>
+          <button class="btn btn-primary">Agregar</button>
+        </tr>
+
+      </table>
+    </form>
+
+
+
+  </div>
+</div>
