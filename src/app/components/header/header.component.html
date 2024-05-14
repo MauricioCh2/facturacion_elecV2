@@ -33,8 +33,17 @@
           </div>
         </li>
 
+        <li class="nav-item dropdown" #elementosAOcultar *ngIf="currentUserService.getTipo() === 'PRO'">
+          <div class="btn-group btn-group-hover" data-bs-hover="dropdown">
+            <a class="nav-link dropdown-toggle dropdown-toggle-split" routerLink="facturacion" routerLinkActive="active" >Faturas</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="facturacion">Facturar</a></li>
+              <li><a class="dropdown-item" routerLink="facturas">Historial de facturas</a></li>
+            </ul>
+          </div>
+        </li>
+
         <li class="nav-item" #elementosAOcultar>
-          <a class="nav-link" routerLink="facturas" routerLinkActive="active" *ngIf="currentUserService.getTipo() === 'PRO'">Faturas</a>
         </li>
 
       </ul>
