@@ -19,8 +19,8 @@ export class AuthGuardService implements CanActivate {
 
       let timerInterval;
       Swal.fire({
-        title: "Auto close alert!",
-        html: "I will close in <b></b> milliseconds.",
+        title: "La session a finalizado!",
+        html: "Volveras al login en <b></b> milisegundos.",
         timer: 2000,
         timerProgressBar: true,
         didOpen: () => {
@@ -33,13 +33,8 @@ export class AuthGuardService implements CanActivate {
         willClose: () => {
           clearInterval(timerInterval);
         }
-      }).then((result) => {
-        if (result.dismiss === Swal.DismissReason.timer) {
-          console.log("I was closed by the timer");
-          this.router.navigate(['/login']);
-        }
-      });
-
+      })
+      this.router.navigate(['/login']);
 
     }
     return isUserLogged;

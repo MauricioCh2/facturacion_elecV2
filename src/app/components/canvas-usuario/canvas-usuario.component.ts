@@ -47,7 +47,7 @@ export class CanvasUsuarioComponent implements  OnInit, OnDestroy{
 
   logout(){
 
-    swal.fire({//popup para decirle al usuario si realmentre queire salir con la libreria sweetalert
+    swal.fire({
       title: '¿Estas seguro?',
       text: "Confirma si deseas cerrar sesion",
       icon: 'warning', // Cambiar 'type' por 'icon'
@@ -57,17 +57,15 @@ export class CanvasUsuarioComponent implements  OnInit, OnDestroy{
       confirmButtonText: 'Si , cerrar sesion',
       cancelButtonText: 'No, cancelar',
       buttonsStyling: true
-    }).then((result) => {
-      if (result.isConfirmed) { // Cambiar 'value' por 'isConfirmed'
-        this.currentUserService.logout();
-        this.modalService.dismissAll(); // cierra todos los modales/offcanvas abiertos
-        this.router.navigate(['/login']);
-        swal.fire(
-          'Salio correctamente',
-          '',
-          'success'
-        )
-      }
+    }).then(() => {
+      this.currentUserService.logout();
+      this.modalService.dismissAll(); // cierra todos los modales/offcanvas abiertos
+      this.router.navigate(['/login']);
+      swal.fire(
+        'Salio correctamente',
+        '',
+        'success'
+      )
     })
 
   }
