@@ -12,12 +12,13 @@
              maxlength="12"
              placeholder="Digite su cedula"
              #idUsuario = "ngModel"
+             [disabled]="editMode"
       >
     <div class="col-md-1">
       <label for="tipo" class="input-group-text" >Tipo</label>
     </div>
-    <div class="col-md-3">
-      <select class="form-select" id="tipo" name="tipoCedula" [(ngModel)]="usuario.tipoCedula">
+    <div class="col-md-3" >
+      <select class="form-select" id="tipo" name="tipoCedula" [(ngModel)]="usuario.tipoCedula" [disabled]="editMode">
         <option value="FIS">Físico</option>
         <option value="JUR">Jurídico</option>
       </select>
@@ -90,7 +91,12 @@
     </div>
 
 
-    <button class="btn btn-success" [disabled]="!usuarioForm.form.valid" >Guardar</button>
+    <button class="btn btn-success" [disabled]="!usuarioForm.form.valid" >
+<!--      Si  es para guardar el boton dira guardar si es para actualizar el boton dira actualizar-->
+      <p class="text-center">{{ editMode ? 'Actualizar' : 'Guardar' }}</p>
+    </button>
+    <!--      Conecta con la directivca y te lleva a esa ruta por defecto-->
+    <a appAuthCurrent [defaultRoute]=" '/login' " class="btn btn-danger">Pagina principal</a>
   </form>
 
 </div>

@@ -3,7 +3,8 @@ import {Usuario} from "../../entities/usuario";
 import {UsuarioService} from "../../services/usuario.service";
 import {Router} from "@angular/router";
 import {CurrentUserService} from "../../services/current-user.service";
-import {Observable} from "rxjs";
+import {FormsModule} from '@angular/forms';
+
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -29,7 +30,7 @@ export class RegistrarUsuarioComponent implements  OnInit{
     this.usuario = new Usuario();
   }
   }
-  guardarUsuario() {
+guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o actuializr
     this.usuario.aprobado = false;
     this.usuario.tipo = 'PRO';
     const operacion = this.editMode
