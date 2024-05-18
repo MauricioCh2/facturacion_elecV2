@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {Usuario} from "../entities/usuario";
 import {Observable, Subject} from "rxjs";
 import {UsuarioService} from "./usuario.service";
+import {toolbox} from "../utiles/toolbox";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -11,27 +13,35 @@ export class CurrentUserService {
   private authStatusSource = new Subject<boolean>();
   authStatus$ = this.authStatusSource.asObservable();
 
-  constructor(private userService : UsuarioService) {
+  constructor(private userService : UsuarioService, private router: Router) {
     this.checkUserSession();
   }
 
-  private checkUserSession() { //verifica la sesion del usuario, si hay y si esta vacio
+  private checkUserSession() { //verifica que el usuario este logueado y activo
     if (typeof window !== 'undefined') {
       const user = localStorage.getItem('currentUser');
       if (user) {
         const parsedUser = JSON.parse(user);
-        // Verifica si el usuario tiene un nombre válido
         if (parsedUser.nombre && parsedUser.nombre.trim().length > 0) {
-          this.userService.getUsuarioById(parsedUser.idUsuario);
-          this.currentUser = parsedUser;
-          this.authStatusSource.next(true);
           this.userService.getUsuarioById(parsedUser.idUsuario).subscribe(usuario => {
-            this.currentUser.tipo = usuario.tipo;
+            if (usuario.aprobado !== 'APR') {
+              toolbox.printf(toolbox.colors.RED + 'El usuario ya no está aprobado');
+              // El usuario ya no está aprobado, manejar este caso
+              console.error('El usuario ya no está aprobado');
+              toolbox.notificacionEstandarConTiempo("Usuario no aprobado!","Volveras al login en <b></b>segundos",2000);
+              this.router.navigate(['/login']);
+              this.logout();
+
+
+            } else {
+              this.currentUser = parsedUser;
+              this.authStatusSource.next(true);
+              this.currentUser.tipo = usuario.tipo;
+            }
           });
         } else {
-          // El usuario no tiene un nombre válido, manejar este caso
           console.error('El usuario en el almacenamiento local no tiene un nombre válido');
-          this.logout(); // Puedes optar por cerrar la sesión o hacer algo más
+          this.logout();
         }
       } else {
         this.authStatusSource.next(false);

@@ -23,6 +23,11 @@ export class AuthGuardService implements CanActivate {
       this.router.navigate(['/login']);
 
     }
+    const  isUserAproved = this.currentUserService.getCurrentUser().aprobado === 'APR';
+    if (!isUserAproved) {
+      toolbox.notificacionEstandarConTiempo("Usuario no aprobado!","Volveras al login en <b></b>segundos",2000);
+      this.router.navigate(['/login']);
+    }
     return isUserLogged;
   }
 }
