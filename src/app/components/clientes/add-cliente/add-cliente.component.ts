@@ -22,13 +22,30 @@ onSubmit(){
   const userId = this.currentUser.getCurrentUser().idUsuario;
     this.usuarioService.addCliente(userId, this.cliente).subscribe(
       data =>{
-        this.router.navigate(['clientes']);
-
+        Swal({
+          title: 'Cliente agregado',
+          text: `Cliente ${this.cliente.nombreC} ha sido agregado con éxito`,
+          type: 'success',
+        }).then((result) => {
+          if (result.value) {
+            this.router.navigate(['/clientes']);
+          }
+        }
+      );
       },
     error => {
-      console.log(error);
-      // Si hay un error, establece la variable de error
-        this.error = 'No se logro agregar el cliente !!!.';
+      // console.log(error);
+      // // Si hay un error, establece la variable de error
+      //   this.error = 'No se logro agregar el cliente !!!.';
+      Swal({
+        title: 'Error',
+        text: `Cliente ${this.cliente.nombreC} no se ha podido agregar`,
+        type: 'error',
+      }).then((result) => {
+        if (result.value) {
+          // this.router.navigate(['/clientes']);
+        }
+      } );
     }
   );
 
