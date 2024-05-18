@@ -1,5 +1,5 @@
 <div class="col-md-6 offset-md-3">
-  <h3 class = "text-center"> Registro </h3>
+  <h3 class="text-center">{{ editMode ? 'Edición' : 'Registro' }}</h3>
   <form (ngSubmit)="onSubmit()" #usuarioForm = "ngForm" class = "row g-3">
     <label for="idUsuario" class="form-label">Cedula:</label>
     <div class="col-md-6 input-group">

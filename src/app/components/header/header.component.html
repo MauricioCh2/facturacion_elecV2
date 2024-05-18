@@ -50,7 +50,7 @@
     </div>
 
     <!-- Botón para desplegar el canvas con la información del usuario -->
-    <button #elementosAOcultar class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasUsuario" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+    <button #elementosAOcultar class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasUsuario" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" *ngIf="currentUserService.getTipo() === 'PRO' || currentUserService.getTipo() === 'ADM'" >
       <span class="navbar-toggler-icon"></span>
     </button>
   </div>

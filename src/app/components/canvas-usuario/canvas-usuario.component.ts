@@ -1,19 +1,21 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UsuarioService} from "../../services/usuario.service";
 import {Router} from "@angular/router";
 import {CurrentUserService} from "../../services/current-user.service";
 import  swal  from 'sweetalert2'; //permite alertas
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Usuario} from "../../entities/usuario";
 
 @Component({
   selector: 'app-canvas-usuario',
   templateUrl: './canvas-usuario.component.html',
   styleUrl: './canvas-usuario.component.css'
 })
-export class CanvasUsuarioComponent {
+export class CanvasUsuarioComponent implements  OnInit{
 
   //Router para redireciones, NgbModal para poder cerrar el offCanva cuando se desloguee
-  constructor(private router:Router, private currentUserService: CurrentUserService, private modalService: NgbModal) { }
+  currentUser: Usuario = null;
+  constructor(private router:Router, private currentUserService: CurrentUserService, private modalService: NgbModal, private userService : UsuarioService) { }
 
 
   logout(){
@@ -46,7 +48,16 @@ export class CanvasUsuarioComponent {
   }
 
   actualizarUsuario() {
-    this.router.navigate(['actualizar-usuario', this.currentUserService.getCurrentUser().idUsuario]);
+    this.router.navigate(['/registrar-usuario']);
+  }
+
+  ngOnInit(): void {
+    if (this.currentUserService.isUserLogged()){
+      this.userService.getUsuarioById(this.currentUserService.getCurrentUser().idUsuario).subscribe(dato =>{
+        this.currentUser = dato;
+      },error => console.log(error));
+    }
+
   }
 
 

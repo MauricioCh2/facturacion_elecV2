@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Usuario} from "../entities/usuario";
-import {Subject} from "rxjs";
+import {Observable, Subject} from "rxjs";
+import {UsuarioService} from "./usuario.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class CurrentUserService {
   private authStatusSource = new Subject<boolean>();
   authStatus$ = this.authStatusSource.asObservable();
 
-  constructor() {
+  constructor(private userService : UsuarioService) {
     this.checkUserSession();
   }
 
@@ -21,8 +22,12 @@ export class CurrentUserService {
         const parsedUser = JSON.parse(user);
         // Verifica si el usuario tiene un nombre válido
         if (parsedUser.nombre && parsedUser.nombre.trim().length > 0) {
+          this.userService.getUsuarioById(parsedUser.idUsuario);
           this.currentUser = parsedUser;
           this.authStatusSource.next(true);
+          this.userService.getUsuarioById(parsedUser.idUsuario).subscribe(usuario => {
+            this.currentUser.tipo = usuario.tipo;
+          });
         } else {
           // El usuario no tiene un nombre válido, manejar este caso
           console.error('El usuario en el almacenamiento local no tiene un nombre válido');
@@ -58,7 +63,9 @@ export class CurrentUserService {
   getCurrentUser() {
     return this.currentUser;
   }
-
+  getCurrentUserComplete() {
+    return this.userService.getUsuarioById(this.currentUser.idUsuario) ;
+  }
   public getTipo() {
     if (!this.currentUser) {
       return "";
