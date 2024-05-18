@@ -77,4 +77,7 @@ export class CurrentUserService {
     this.logout();
   }
 
+  public getNombre(){
+    this.currentUser.nombre;
+  }
 }

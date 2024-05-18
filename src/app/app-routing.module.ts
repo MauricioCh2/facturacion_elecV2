@@ -10,6 +10,7 @@ import {AddProductoComponent} from "./components/productos/add-producto/add-prod
 import { AuthGuardService } from './services/auth-guard.service';
 import {ListaFacturasComponent} from "./components/facturas/lista-facturas/lista-facturas.component";
 import {FacturarComponent} from "./components/facturas/facturar/facturar.component";
+import {ListaProductosComponent} from "./components/productos/lista-productos/lista-productos.component";
 
 const routes: Routes = [
   {path : '', redirectTo: 'login', pathMatch: 'full'} ,//si esta vacio retorna a usuarios, CAMBIAR A ALOGIN
@@ -22,7 +23,7 @@ const routes: Routes = [
   {path : 'clientes', component: ListarClientesComponent, canActivate: [AuthGuardService] },
 
   {path : 'add-producto', component: AddProductoComponent, canActivate: [AuthGuardService] },
-  {path : 'productos', component: ListarProvedoresComponent, canActivate: [AuthGuardService] },
+  {path : 'productos', component: ListaProductosComponent, canActivate: [AuthGuardService] },
 
   {path : 'facturacion', component: FacturarComponent, canActivate: [AuthGuardService] },
   {path : 'facturas', component: ListaFacturasComponent, canActivate: [AuthGuardService] },
