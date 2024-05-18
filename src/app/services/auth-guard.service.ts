@@ -16,7 +16,7 @@ export class AuthGuardService implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const isUserLogged = this.currentUserService.isUserLogged();
     if (!isUserLogged) {
-
+//
       let timerInterval;
       Swal.fire({
         title: "La session a finalizado!",
