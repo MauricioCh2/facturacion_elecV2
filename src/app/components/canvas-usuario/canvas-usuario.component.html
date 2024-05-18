@@ -6,13 +6,16 @@
   <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
     <li class="nav-item">
       <p class="nav-text"  >
-        Aqui ira la info del usuario:
-<!--        Informacion:-->
-<!--        {{currentUser.nombre}}-->
-<!--        {{currentUser.idUsuario}}-->
-<!--        {{currentUser.tipoCedula}}-->
-
+        Informacion:
       </p>
+      <div *ngIf="currentUser">
+        Nombre: {{ currentUser.nombre }}
+        <br />
+        Identificación: {{ currentUser.idUsuario }}
+        <br />
+        Tipo de Cédula: {{ currentUser.tipoCedula }}
+      </div>
+
     </li>
     <li class="nav-item">
       <button class="btn btn-info" (click)="actualizarUsuario()">Editar</button>

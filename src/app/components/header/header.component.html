@@ -57,7 +57,7 @@
 </nav>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="canvasUsuario" aria-labelledby="offcanvasNavbarLabel">
-  <app-canvas-usuario></app-canvas-usuario>
+  <app-canvas-usuario *ngIf="currentUserService.isUserLogged()" [currentUser]="currentUser"></app-canvas-usuario>
 </div>
 
 <!--<div class="canvas collapse justify-content-between" id="infonavBar" data-bs-theme="dark" data-bs-scroll="true" tabindex="-1" >-->

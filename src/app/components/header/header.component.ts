@@ -11,6 +11,7 @@ import {
 import {CurrentUserService} from "../../services/current-user.service";
 import {Subscription} from "rxjs";
 import { colorConsole } from './../../color-console.js';
+import {Usuario} from "../../entities/usuario";
 
 @Component({
   selector: 'app-header',
@@ -20,10 +21,14 @@ import { colorConsole } from './../../color-console.js';
 export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 @ViewChildren('elementosAOcultar') elementosAOcultar: QueryList<ElementRef>;
 private authStatusSubscription: Subscription;
+  currentUser: Usuario;
 
   constructor(private renderer: Renderer2, protected currentUserService: CurrentUserService) {}
 
   ngOnInit() {
+
+    this.currentUser = this.currentUserService.getCurrentUser();
+
     console.log( colorConsole.RED + "Esta logeado alguien? " +this.currentUserService.isUserLogged());
  // colorConsole.printf(colorConsole.RED +"Esta logeado alguien? " +this.currentUserService.isUserLogged());
     this.authStatusSubscription = this.currentUserService.authStatus$.subscribe((isLoggedIn) => {

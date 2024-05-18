@@ -7,7 +7,7 @@ import {UsuarioService} from "./usuario.service";
   providedIn: 'root'
 })
 export class CurrentUserService {
-  private currentUser = new Usuario();
+  private currentUser = null;
   private authStatusSource = new Subject<boolean>();
   authStatus$ = this.authStatusSource.asObservable();
 
@@ -39,13 +39,13 @@ export class CurrentUserService {
     }
   }
 
-  public login(user : Usuario) {
-    console.log(" INICIE SESSION   como: "+ user.idUsuario);
+  public login(user: Usuario) {
+    console.log(" INICIE SESSION   como: " + user.idUsuario);
     this.currentUser = user;
     if (typeof window !== 'undefined') {
       localStorage.setItem('currentUser', JSON.stringify(user));
     }
-    this.authStatusSource.next(true);
+    this.authStatusSource.next(true); // Emitir evento de autenticación
   }
 
   public logout() {
@@ -53,7 +53,7 @@ export class CurrentUserService {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('currentUser');
     }
-    this.authStatusSource.next(false);
+    this.authStatusSource.next(false); // Emitir evento de cierre de sesión
   }
 
   isUserLogged() {
