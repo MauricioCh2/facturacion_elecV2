@@ -3,6 +3,8 @@ import {Usuario} from "../../entities/usuario";
 import {Router} from "@angular/router";
 import {UsuarioService} from "../../services/usuario.service";
 import  swal  from 'sweetalert2';
+import {CurrentUserService} from "../../services/current-user.service";
+import {toolbox} from "../../utiles/toolbox";
 @Component({
   selector: 'app-listar-provedores',
   templateUrl: './listar-provedores.component.html',
@@ -12,7 +14,7 @@ export class ListarProvedoresComponent implements OnInit {
   proveedores : Usuario[];
 
 
-  constructor(private usuarioServicio: UsuarioService, private router:Router){
+  constructor(protected current: CurrentUserService , private usuarioServicio: UsuarioService, private router:Router){
   }
   ngOnInit(): void {
     this.obtenerProvedores();
@@ -63,6 +65,7 @@ export class ListarProvedoresComponent implements OnInit {
 
   guardarAprobacion(prov: Usuario) {
     this.usuarioServicio.actualizarUsuario(prov.idUsuario,prov).subscribe(dato => {
+      toolbox.notificacionEstandarConTiempo('Exito', 'el cambio a surgido con exito ', 1000);
     },error => console.log(error));
   }
 }

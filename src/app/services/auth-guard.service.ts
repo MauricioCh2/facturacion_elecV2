@@ -3,6 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable } from 'rxjs';
 import {CurrentUserService} from "./current-user.service";
 import Swal from "sweetalert2";
+import {toolbox} from "../utiles/toolbox";
 
 
 @Injectable({
@@ -17,23 +18,8 @@ export class AuthGuardService implements CanActivate {
     const isUserLogged = this.currentUserService.isUserLogged();
     if (!isUserLogged) {
 //
-      let timerInterval;
-      Swal.fire({
-        title: "La session a finalizado!",
-        html: "Volveras al login en <b></b> milisegundos.",
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: () => {
-          Swal.showLoading();
-          const timer = Swal.getPopup().querySelector("b");
-          timerInterval = setInterval(() => {
-            timer.textContent = `${Swal.getTimerLeft()}`;
-          }, 11111111);
-        },
-        willClose: () => {
-          clearInterval(timerInterval);
-        }
-      })
+
+      toolbox.notificacionEstandarConTiempo("La session a finalizado!","Volveras al login en <b></b>segundos",2000);
       this.router.navigate(['/login']);
 
     }

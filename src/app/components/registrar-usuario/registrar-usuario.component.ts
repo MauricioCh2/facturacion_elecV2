@@ -31,7 +31,7 @@ export class RegistrarUsuarioComponent implements  OnInit{
   }
   }
 guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o actuializr
-    this.usuario.aprobado = false;
+    this.usuario.aprobado = 'ESP';
     this.usuario.tipo = 'PRO';
     const operacion = this.editMode
       ? this.usuarioService.actualizarUsuario(this.usuario.idUsuario, this.usuario)
