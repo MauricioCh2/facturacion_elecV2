@@ -1,0 +1,23 @@
+<h2> Lista de productos de: {{getNombre()}}  </h2>
+<table class="table table-striped">
+  <thead class= "table-dark">
+  <tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Codigo</th>
+    <th>Descripcion</th>
+    <th>Precio</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let producto of productos">
+    <td>{{producto.idProducto}}</td>
+    <td>{{producto.nombre}}</td>
+    <td>{{producto.codigo}}</td>
+    <td>{{producto.descripcion }}</td>
+    <td>{{producto.precio }}</td>
+  </tr>
+  </tbody>
+
+</table>

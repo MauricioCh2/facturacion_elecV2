@@ -1,7 +1,7 @@
-<div class="col-md-6 offset-md-3 d-flex justify-content-center align-items-center">
-  <div class="login-container border p-3">
-    <h3 class = "text-center"> Login </h3>
-  <div class="col-md-6">
+<div class="col-md-6 offset-md-3 d-flex justify-content-center align-items-center ">
+  <div class="login-container border p-3 d-flex flex-column justify-content-center align-items-center">
+    <h3 class="text-center">Login</h3>
+    <div class="col-md-6 form-floating d-flex flex-column justify-content-center align-items-center">
     <form (ngSubmit)="onSubmit()" #usuarioForm = "ngForm" >
       <div>
         <label for="idProveedor" >Identificacion:</label>
@@ -47,3 +47,5 @@
     </div>
   </div>
   </div>
+</div>
+

@@ -1,0 +1,30 @@
+<div class="offcanvas-header">
+  <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Info</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" #offcanvas></button>
+</div>
+<div class="offcanvas-body">
+  <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+    <li class="nav-item">
+      <p class="nav-text"  >
+        Informacion:
+      </p>
+      <div *ngIf="currentUser">
+        Nombre: {{ currentUser.nombre }}
+        <br />
+        Identificación: {{ currentUser.idUsuario }}
+        <br />
+        Tipo de Cédula: {{ currentUser.tipoCedula }}
+      </div>
+
+    </li>
+    <li class="nav-item">
+      <button class="btn btn-info" (click)="actualizarUsuario()">Editar</button>
+    </li>
+  <br><hr><br>
+
+    <li class="nav-item  clearfix">
+      <button class="btn btn-danger float-end" (click)="logout()">logout</button>
+    </li>
+
+  </ul>
+</div>

@@ -1,0 +1,63 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3>Agregar Cliente</h3>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()" #clienteForm="ngForm">
+            <div class="form-group">
+              <label for="identificacionC">Identificación</label>
+              <input
+                type="text"
+                class="form-control"
+                id="identificacionC"
+                name="identificacionC"
+                [(ngModel)]="cliente.identificacionC"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="nombreC">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nombreC"
+                name="nombreC"
+                [(ngModel)]="cliente.nombreC"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="correo">Correo</label>
+              <input
+                type="email"
+                class="form-control"
+                id="correo"
+                name="correo"
+                 [(ngModel)]="cliente.correo"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input
+                type="text"
+                class="form-control"
+                id="telefono"
+                name="telefono"
+                [(ngModel)]="cliente.telefono"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary mt-3" [disabled]="!clienteForm.form.valid">
+              Agregar Cliente
+            </button>
+            <div *ngIf="error" class="error">{{error}}</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

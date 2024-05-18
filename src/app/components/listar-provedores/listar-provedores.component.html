@@ -6,24 +6,52 @@
     <th>Nombre</th>
     <th>Rol</th>
     <th>Fisico o Juridico</th>
-    <th>Aprobado</th>
+    <th>Estado</th>
     <th>DEBUGEO</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let prov of proveedores">
+<tr *ngFor="let prov of proveedores">
     <td>{{prov.idUsuario}}</td>
     <td>{{prov.nombre}}</td>
     <td>{{prov.tipo}}</td>
     <td>{{prov.tipoCedula }}</td>
-    <td>
-      <select [(ngModel)]="prov.aprobado">
-        <option [value]="true">Aprobado</option>
-        <option [value]="false">Denegado</option>
-      </select>
-      <button (click)="guardarAprobacion(prov)">Guardar</button>
+  <td>
+    <div class="input-group">
+      <select class="form-select form-select-m" [(ngModel)]="prov.aprobado">
+        <ng-container *ngIf="prov.aprobado === 'ESP'; else aprob">
+          <option value="ESP">Espera</option>
+          <option value="APR">Aprobado</option>
+          <option value="REC">Rechazado</option>
+        </ng-container>
+        <ng-template #aprob>
+          <ng-container *ngIf="prov.aprobado === 'APR'; else revoc">
+            <option value="APR">Aprobado</option>
+            <option value="REV">Revocado</option>
+          </ng-container>
+          <ng-template #revoc>
+          <ng-container *ngIf="prov.aprobado === 'REV'; else recha">
+            <option value="REV">Revocado</option>
+            <option value="APR">Aprobado</option>
+          </ng-container>
+          </ng-template>
 
-    </td>
+          <ng-template #recha>
+          <ng-container *ngIf="prov.aprobado === 'REC'; else defaultOptions">
+            <option value="REC">Rechazado</option>
+            <option value="APR">Aprobado</option>
+          </ng-container>
+          </ng-template>
+
+          <ng-template #defaultOptions>
+            <option value="APR">Aprobado</option>
+            <option value="REC">Denegado</option>
+          </ng-template>
+        </ng-template>
+      </select>
+      <button class="btn btn-outline-secondary" (click)="guardarAprobacion(prov)">Guardar</button>
+    </div>
+  </td>
     <td>
       <button class="btn btn-info" (click)="actualizarUsuario(prov.idUsuario)">Editar</button>
       <button class="btn btn-danger" style="margin-left: 10px " (click)="eliminarUsuario(prov.idUsuario)">Eliminar</button>
