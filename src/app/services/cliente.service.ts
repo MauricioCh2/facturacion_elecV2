@@ -12,7 +12,9 @@ export class ClienteService {
   getClientesByProveedorId(id: string): Observable<Cliente> {
     return this.httpClient.get<Cliente>(`${this.baseURL}/${id}`);
   }
-  
+ 
+
+
 
 
 }

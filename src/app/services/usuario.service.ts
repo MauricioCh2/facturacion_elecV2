@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Usuario} from "../entities/usuario";
+import {Cliente} from "../entities/cliente";
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,8 @@ export class UsuarioService {
 
   login(usuario: Usuario): Observable<any> {
     return this.httpClient.post(`${this.baseURL}/login`, usuario);
+  }
+  addCliente(id: string, cliente: Cliente): Observable<Cliente>{
+    return this.httpClient.post<Cliente>(`${this.baseURL}/agregarCliente/${id}`, cliente);
   }
 }
