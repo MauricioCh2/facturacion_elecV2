@@ -15,19 +15,34 @@ export class AuthGuardService implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const isUserLogged = this.currentUserService.isUserLogged();
-    if (!isUserLogged) {
-//
 
-      toolbox.notificacionEstandarConTiempo("La session a finalizado!","Volveras al login en <b></b>segundos",2000);
+    const isUserLogged = this.currentUserService.isUserLogged(); //verifica que este logeado
+    if (!isUserLogged) {
+      toolbox.notificacionEstandarConTiempo("La sesión a finalizado!","Volveras al login en <b></b>segundos",2000);
       this.router.navigate(['/login']);
 
     }
-    const  isUserAproved = this.currentUserService.getCurrentUser().aprobado === 'APR';
+
+    const  isUserAproved = this.currentUserService.getCurrentUser().aprobado === 'APR'; //verifica que este aprobado
     if (!isUserAproved) {
       toolbox.notificacionEstandarConTiempo("Usuario no aprobado!","Volveras al login en <b></b>segundos",2000);
       this.router.navigate(['/login']);
+      return false;
     }
-    return isUserLogged;
+    const userType = this.currentUserService.getCurrentUser().tipo; //verifica que contenga los permisos
+    if (next.data['roles'] && next.data['roles'].indexOf(userType) === -1) {
+      // si no es autorizado vuelve al home
+      toolbox.notificacionEstandarConTiempo("Ups! no deberias estar aqui","Volveras a tu pagina principal  en <b></b>segundos",2000);
+
+      if(userType === 'ADM') {
+        this.router.navigate(['/proveedores']); // si es admin
+      }
+      if(userType === 'PRO') { //si es provedor
+        this.router.navigate(['/facturacion']);
+      }
+      return false;
+
+    }
+    return true;
   }
 }

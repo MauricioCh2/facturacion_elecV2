@@ -16,7 +16,7 @@ export class ListarClientesComponent implements OnInit{
   ngOnInit(): void {
     this.clientesByProveedorId(this.currentUser.getCurrentUser().idUsuario);
   }
-  private clientesByProveedorId(id: string) {
+  public clientesByProveedorId(id: string) {
     this.clienteService.getClientesByProveedorId(id).subscribe(data => {
       // Verifica si data es un array o un objeto único
       if (Array.isArray(data)) {
