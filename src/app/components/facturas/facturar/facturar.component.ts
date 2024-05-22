@@ -29,7 +29,7 @@ export class FacturarComponent implements OnInit{
   }
 
   getName(): string {
-    return this.currentUser.nombre;
+    return this.currentService.getNombre();
   }
 
   public getClientes(id: string) {
@@ -54,5 +54,6 @@ export class FacturarComponent implements OnInit{
       }
     });
   }
+
 
 }

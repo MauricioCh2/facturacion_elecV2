@@ -4,6 +4,7 @@ import {ProductoService} from "../../../services/producto.service";
 import {CurrentUserService} from "../../../services/current-user.service";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
+import {toolbox} from "../../../utiles/toolbox";
 
 @Component({
   selector: 'app-add-producto',
@@ -11,8 +12,9 @@ import Swal from "sweetalert2";
   styleUrl: './add-producto.component.css'
 })
 export class AddProductoComponent {
-  producto: Productos;
+  producto: Productos = new Productos();
   protected error: string;
+
 
   constructor(private productoService : ProductoService, private router:Router, private current  : CurrentUserService) {
   }
@@ -22,32 +24,33 @@ export class AddProductoComponent {
       dato => {
         console.log(dato);
         Swal.fire({
-          title: 'Cliente agregado',
+          title: 'Producto agregado',
           text: `Cliente ${this.producto.nombre} ha sido agregado con éxito`,
           icon: 'success',
         }).then((result) => {
-          if (result.value) {
-        this.goToList();
-          }
+            if (result.value) {
+              this.goToList();
+            }
           }
         );
 
       },
       error=> {console.log(error)
-      Swal.fire({
-        title: 'Error',
-        text: `Cliente ${this.producto.nombre} no se ha podido agregar`,
-        icon: 'error',
-      }).then((result) => {
-        if (result.value) {
-          // this.router.navigate(['/clientes']);
-        }
-      } );
-    }
+        Swal.fire({
+          title: 'Error',
+          text: `Cliente ${this.producto.nombre} no se ha podido agregar`,
+          icon: 'error',
+        }).then((result) => {
+          if (result.value) {
+            // this.router.navigate(['/clientes']);
+          }
+        } );
+      }
     );
   }
 
   onSubmit(){
+    toolbox.printf(toolbox.colors.BLUE + "Mi producto: " + this.producto);
     this.guardarProducto();
   }
   goToList(){
@@ -58,3 +61,4 @@ export class AddProductoComponent {
     return this.current.getNombre();
   }
 }
+
