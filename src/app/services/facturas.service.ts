@@ -25,7 +25,8 @@ export class FacturasService {
       factura: factura,
       detalles: detalles
     };
-    console.log(toolbox.colors.BLUE + facturaConDetalles+ toolbox.colors.RESET);
+
+
     return this.httpClient.post(`${this.baseURL}`, facturaConDetalles);
 
   }

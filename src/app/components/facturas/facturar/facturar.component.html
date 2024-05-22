@@ -20,14 +20,14 @@
                     required
 
             >
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
             <ul class="dropdown-menu dropdown-menu-end">
               <li class="dropdown-item" *ngFor="let cli of clientes">
                 <a class="dropdown-item" (click)="seleccionarCliente(cli)">{{cli.nombreC}}</a>
               </li>
               <li><hr class="dropdown-divider"></li>
             </ul>
-            <button class = "btn btn-outline-secondary "> L </button>
+            <button type="button" class = "btn btn-outline-secondary "> L </button>
 <!--            <div class = "alert alert-danger d-flex align-items-center" role = "alert"*ngIf="idUsuario.invalid && (idUsuario.dirty || idUsuario.touched)">-->
 <!--              <div  *ngIf="idUsuario.errors['required']" >-->
 <!--                El id es requerido-->
@@ -46,15 +46,15 @@
                    required
             >
 
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+            <button type="button"  class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
             <ul class="dropdown-menu dropdown-menu-end">
               <li class="dropdown-item" *ngFor="let pro of productos">
                 <a class="dropdown-item" (click)="seleccionarProducto(pro)">{{pro.nombre}}</a>
              </li>
               <li><hr class="dropdown-divider"></li>
             </ul>
-            <button class = "btn btn-outline-secondary "> L </button>
-            <button class="btn btn-outline-secondary" (click)="agregarProducto()"> + </button>
+            <button type="button" class = "btn btn-outline-secondary "> L </button>
+            <button type="button" class="btn btn-outline-secondary" (click)="agregarProducto()"> + </button>
               <!--            <div class = "alert alert-danger d-flex align-items-center" role = "alert"*ngIf="idUsuario.invalid && (idUsuario.dirty || idUsuario.touched)">-->
             <!--              <div  *ngIf="idUsuario.errors['required']" >-->
             <!--                El id es requerido-->
@@ -87,8 +87,8 @@
                 <td>{{det.descripcionDetalle}}</td>
                 <td>
                   {{det.cantidad}}
-                  <button (click)="addDet(det)">+</button>
-                  <button (click)="remDet(det)">-</button>
+                  <button type="button" (click)="addDet(det)">+</button>
+                  <button type="button" (click)="remDet(det)">-</button>
                 </td>
               </tr>
               </tbody>

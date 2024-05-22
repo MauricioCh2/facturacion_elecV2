@@ -22,7 +22,6 @@ export class FacturarComponent implements OnInit{
   clientes: Cliente[];
   clienteActual: Cliente = new Cliente();
   currentUser: Usuario;
-  facturaActual: Facturas[];
   detalles: Detalle[];
   contador : number = 0;
   total: number = 0;
@@ -92,7 +91,7 @@ export class FacturarComponent implements OnInit{
     detalle.descripcionDetalle = this.productoActual.descripcion;
     detalle.cantidad = 1;
     //hacer un id detalle y un num Detalle
-    detalle.numDetalle = this.contador;
+    detalle.numDetalle = this.contador++;
     //no se si hara falta un precio y valor final
     //por impuestos y eso
     detalle.valorProductos = this.productoActual.precio;
@@ -114,10 +113,16 @@ export class FacturarComponent implements OnInit{
   }
 
   onSubmit() {
+    console.log("estoy en el submit");
     let factura: Facturas = new Facturas();
-    factura.identificacionCliente = this.clienteActual.identificacionC;
+    factura.identificacionCliente = this.clienteActual.idCliente;
     factura.identificacionUsuario = this.currentUser.idUsuario;
+    this.calcularTotal();
     factura.valorFinal = this.total;
+
+
+    console.log("Factura: "+ factura.toString());
+    console.log("Sus detalles: "+ this.detalles.toString());
 
     this.facturaService.facturar(factura, this.detalles).subscribe(data => {
       console.log(data);
