@@ -2,16 +2,12 @@
   <div class="col-md-5">
     <div class="card">
       <div class="card-header">
-    <h3 class="text-center">Facturacion</h3>
+    <h2 class="text-center">Facturacion</h2>
+    <h3 class="text-center"><p>Proveedor:<a>{{getName()}}</a></p></h3>
       </div>
-    <form>
+    <form (ngSubmit)="onSubmit()" #facturaForm = "ngForm" >
       <table>
         <!--        luego le cambio el color-->
-        <thead class= "table-dark">
-        <tr class = "text-align-center">
-          <p>Proveedor:<a>{{getName()}}</a></p>
-        </tr>
-        </thead>
         <tbody>
 <!--        Espacio de  seleccion cliente-->
         <tr>
@@ -20,18 +16,18 @@
             <input type="text"
                    class="form-control"
                    aria-label="Text input with dropdown button"
+                   [value]="clienteActual.nombreC ?? ' '"
                     required
+
             >
-            <!--#idCliente = "ngModel"-->
-            <!--                  [(ngModel)] = "idCliente"-->
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" *ngFor="let cli of clientes">
-                <a> {{cli.nombreC}}</a>
-              </a></li>
+              <li class="dropdown-item" *ngFor="let cli of clientes">
+                <a class="dropdown-item" (click)="seleccionarCliente(cli)">{{cli.nombreC}}</a>
+              </li>
               <li><hr class="dropdown-divider"></li>
             </ul>
-            <button class = "btn btn-outline-secondary "> L </button>
+            <button type="button" class = "btn btn-outline-secondary "> L </button>
 <!--            <div class = "alert alert-danger d-flex align-items-center" role = "alert"*ngIf="idUsuario.invalid && (idUsuario.dirty || idUsuario.touched)">-->
 <!--              <div  *ngIf="idUsuario.errors['required']" >-->
 <!--                El id es requerido-->
@@ -39,62 +35,84 @@
 <!--            </div>-->
           </div>
         </tr>
-<!--        Espacio de seleccion de Productos-->
+<!--  --------------------------------------- Espacio de seleccion de Productos----------------------------------------------->
         <tr>
           <div class="input-group mb-3">
             <p>Producto: </p>
             <input type="text"
                    class="form-control"
                    aria-label="Text input with dropdown button"
+                   [value]="productoActual.nombre ?? ' '"
                    required
             >
-            <!--#idCliente = "ngModel"-->
-            <!--                  [(ngModel)] = "idCliente"-->
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" *ngFor="let pro of productos">
-                <a> {{pro.nombre}}</a>
 
-              </a></li>
+            <button type="button"  class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li class="dropdown-item" *ngFor="let pro of productos">
+                <a class="dropdown-item" (click)="seleccionarProducto(pro)">{{pro.nombre}}</a>
+             </li>
               <li><hr class="dropdown-divider"></li>
             </ul>
-            <button class = "btn btn-outline-secondary "> L </button>
-            <button class = "btn btn-outline-secondary "> + </button>
-            <!--            <div class = "alert alert-danger d-flex align-items-center" role = "alert"*ngIf="idUsuario.invalid && (idUsuario.dirty || idUsuario.touched)">-->
+            <button type="button" class = "btn btn-outline-secondary "> L </button>
+            <button type="button" class="btn btn-outline-secondary" (click)="agregarProducto()"> + </button>
+              <!--            <div class = "alert alert-danger d-flex align-items-center" role = "alert"*ngIf="idUsuario.invalid && (idUsuario.dirty || idUsuario.touched)">-->
             <!--              <div  *ngIf="idUsuario.errors['required']" >-->
             <!--                El id es requerido-->
             <!--              </div>-->
             <!--            </div>-->
           </div>
         </tr>
-        <tr>
-          <table>
-            <thead class= "table-dark">
-            <tr>
-              <th>Codigo</th>
-              <th>Nombre</th>
-              <th>Precio</th>
-              <th>Descripcion</th>
-              <th>Cantidad</th>
-            </tr>
-            </thead>
-            <tbody>
-              <div data-bs-spy="scroll" >
 
-              </div>
-            </tbody>
-          </table>
-          <p>Monto:</p>
-<!--          aqui iria el monto final-->
+
+<!--        ---------------------------------------Espacio de detalles---------------------------------------------------->
+
+        <tr>
+          <td>
+
+            <table class="table table-striped">
+              <thead class= "table-dark">
+              <tr>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Descripcion</th>
+                <th>Cantidad</th>
+              </tr>
+              </thead>
+              <tbody class="scrollable-tbody">
+              <tr *ngFor="let det of detalles">
+                <td>{{det.numDetalle}}</td>
+                <td>{{det.codigoProducto}}</td>
+                <td>{{det.valorProductos}}</td>
+                <td>{{det.descripcionDetalle}}</td>
+                <td>
+                  {{det.cantidad}}
+                  <button type="button" (click)="addDet(det)">+</button>
+                  <button type="button" (click)="remDet(det)">-</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+          </td>
         </tr>
+          <p>Monto:
+            {{ total }}
+          </p>
+<!--          aqui iria el monto final-->
+
 
         </tbody>
 
         <tr>
-          <button class="btn btn-primary">Agregar</button>
+          <button class="btn btn-primary"  [disabled]="!facturaForm.form.valid">Agregar</button>
         </tr>
 
+
       </table>
+
+
+
     </form>
 
 
