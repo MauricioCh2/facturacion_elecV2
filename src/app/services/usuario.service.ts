@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Usuario} from "../entities/usuario";
-import {Cliente} from "../entities/cliente";
+import {Cliente } from "../entities/cliente";
 
 @Injectable({
   providedIn: 'root'
