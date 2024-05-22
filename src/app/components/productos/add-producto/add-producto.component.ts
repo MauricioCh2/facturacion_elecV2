@@ -17,9 +17,11 @@ export class AddProductoComponent {
 
 
   constructor(private productoService : ProductoService, private router:Router, private current  : CurrentUserService) {
+    this.producto.proveedorP = current.getID();
   }
 
   guardarProducto(){
+
     this.productoService.registrarProductoPorId(this.producto).subscribe(
       dato => {
         console.log(dato);

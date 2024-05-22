@@ -91,4 +91,7 @@ export class CurrentUserService {
   public getNombre(): string{
     return this.currentUser.nombre;
   }
+  public getID(): string{
+    return this.currentUser.idUsuario;
+  }
 }
