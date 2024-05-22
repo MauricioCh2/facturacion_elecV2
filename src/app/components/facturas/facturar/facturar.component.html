@@ -1,12 +1,15 @@
-<div class="col-md-6 offset-md-3 d-flex justify-content-center align-items-center ">
-  <div class="form-container border p-3 d-flex flex-column justify-content-center align-items-center">
+<div class="container mt-4 row justify-content-center ">
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header">
     <h3 class="text-center">Facturacion</h3>
+      </div>
     <form>
       <table>
         <!--        luego le cambio el color-->
         <thead class= "table-dark">
         <tr class = "text-align-center">
-          <th>Proveedor: {{getName()}}</th>
+          <p>Proveedor:<a>{{getName()}}</a></p>
         </tr>
         </thead>
         <tbody>
@@ -23,7 +26,9 @@
             <!--                  [(ngModel)] = "idCliente"-->
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="#">Poner la lista de clientes aso</a></li>
+              <li><a class="dropdown-item" *ngFor="let cli of clientes">
+                <a> {{cli.nombreC}}</a>
+              </a></li>
               <li><hr class="dropdown-divider"></li>
             </ul>
             <button class = "btn btn-outline-secondary "> L </button>
@@ -47,7 +52,10 @@
             <!--                  [(ngModel)] = "idCliente"-->
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="#">Poner la lista de productos aso</a></li>
+              <li><a class="dropdown-item" *ngFor="let pro of productos">
+                <a> {{pro.nombre}}</a>
+
+              </a></li>
               <li><hr class="dropdown-divider"></li>
             </ul>
             <button class = "btn btn-outline-secondary "> L </button>
@@ -71,7 +79,9 @@
             </tr>
             </thead>
             <tbody>
+              <div data-bs-spy="scroll" >
 
+              </div>
             </tbody>
           </table>
           <p>Monto:</p>
@@ -89,5 +99,7 @@
 
 
 
+    </div>
   </div>
 </div>
+

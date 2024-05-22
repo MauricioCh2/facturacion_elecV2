@@ -37,6 +37,7 @@ export class CurrentUserService {
               this.currentUser = parsedUser;
               this.authStatusSource.next(true);
               this.currentUser.tipo = usuario.tipo;
+              this.currentUser.tipo = usuario.nombre;
             }
           });
         } else {
@@ -87,7 +88,10 @@ export class CurrentUserService {
     this.logout();
   }
 
-  public getNombre(){
-    this.currentUser.nombre;
+  public getNombre(): string{
+    return this.currentUser.nombre;
+  }
+  public getID(): string{
+    return this.currentUser.idUsuario;
   }
 }

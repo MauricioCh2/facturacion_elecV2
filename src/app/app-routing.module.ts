@@ -17,18 +17,18 @@ const routes: Routes = [
   {path : 'login', component: LoginComponent},
   {path : 'acerca-de', component: AcercaDeComponent},
   {path : 'registrar-usuario', component: RegistrarUsuarioComponent,  },
-  {path : 'proveedores', component: ListarProvedoresComponent, canActivate: [AuthGuardService] },//el can activate hace queno se pueda entrar si no cumple el requerimiento (en este caso estar logeado )
+  {path : 'proveedores', component: ListarProvedoresComponent, canActivate: [AuthGuardService], data: {roles: ['ADM']} },//el can activate hace queno se pueda entrar si no cumple el requerimiento (en este caso estar logeado )
 
-  {path : 'add-cliente', component: AddClienteComponent, canActivate: [AuthGuardService] },
-  {path : 'clientes', component: ListarClientesComponent, canActivate: [AuthGuardService] },
+  {path : 'add-cliente', component: AddClienteComponent, canActivate: [AuthGuardService], data: {roles: ['PRO']} },
+  {path : 'clientes', component: ListarClientesComponent, canActivate: [AuthGuardService], data: {roles: ['PRO']} },
 
-  {path : 'add-producto', component: AddProductoComponent, canActivate: [AuthGuardService] },
-  {path : 'productos', component: ListaProductosComponent, canActivate: [AuthGuardService] },
+  {path : 'add-producto', component: AddProductoComponent, canActivate: [AuthGuardService], data: {roles: ['PRO']} },
+  {path : 'productos', component: ListaProductosComponent, canActivate: [AuthGuardService] , data: {roles: ['PRO']}},
 
-  {path : 'facturacion', component: FacturarComponent, canActivate: [AuthGuardService] },
-  {path : 'facturas', component: ListaFacturasComponent, canActivate: [AuthGuardService] },
+  {path : 'facturacion', component: FacturarComponent, canActivate: [AuthGuardService] , data: {roles: ['PRO']}},
+  {path : 'facturas', component: ListaFacturasComponent, canActivate: [AuthGuardService] , data: {roles: ['PRO']}},
 
-
+  {path: '**', redirectTo: 'login'}
 ];
 
 @NgModule({

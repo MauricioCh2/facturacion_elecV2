@@ -17,5 +17,4 @@ export class ProductoService {
   registrarProductoPorId( producto: Productos){
     return this.httpClient.post(`${this.baseURL}`, producto);
   }
-
 }

@@ -3,7 +3,8 @@ import {Usuario} from "../../entities/usuario";
 import {UsuarioService} from "../../services/usuario.service";
 import {Router} from "@angular/router";
 import {CurrentUserService} from "../../services/current-user.service";
-import {FormsModule} from '@angular/forms';
+import {toolbox} from "../../utiles/toolbox";
+
 
 
 @Component({
@@ -14,6 +15,8 @@ import {FormsModule} from '@angular/forms';
 export class RegistrarUsuarioComponent implements  OnInit{
   usuario : Usuario = new Usuario();
   editMode : boolean = false;
+
+
   constructor(private usuarioService : UsuarioService, private router:Router, protected current : CurrentUserService) {
   }
   ngOnInit(): void {
@@ -39,9 +42,19 @@ guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o 
     operacion.subscribe(//sea cual sea la opcion imprime  la salida y redirije a la lista
       dato => {
         console.log(dato);
+        if(this.editMode == false) {
+        toolbox.notificacionEstandar("Exito", ("El usuario: "+this.usuario.nombre + "a sido guardado correctamente"), "success");
+        }else{
+          toolbox.notificacionEstandar("Exito", ("El usuario: "+this.usuario.nombre + "a sido actualizado correctamente"), "success");
+        }
         this.goToLogin();
       },
-      error => console.log(error)
+      error => {
+        console.log(error);
+        toolbox.notificacionEstandar("Error", ("A habido un error " + error), "error");
+
+
+      }
     );
   }
 
@@ -52,4 +65,5 @@ guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o 
     console.log(this.usuario);
     this.guardarUsuario();
   }
+
 }
