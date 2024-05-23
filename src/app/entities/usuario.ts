@@ -4,5 +4,5 @@ export class Usuario { //Nota, el nombre tiene que hacer match con las entidades
   contrasenia : string;
   tipo : string;
   tipoCedula : string;
-  aprobado : boolean;
+  aprobado : String;
 }

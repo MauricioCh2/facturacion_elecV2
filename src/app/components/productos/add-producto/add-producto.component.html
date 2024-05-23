@@ -1,1 +1,126 @@
-<p>add-producto works!</p>
+<div class="container mt-5 row justify-content-center ">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3>Agregar producto para: <a>{{getNombre()}}</a></h3>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()" #productoForm="ngForm">
+
+            <div class="form-group">
+              <label for="nombre">nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nombre"
+                name="nombre"
+                minlength="3"
+                maxlength="80"
+                required
+                [(ngModel)]="producto.nombre"
+
+                #nombre = "ngModel"
+
+              />
+              <div class = "alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                <div *ngIf="nombre.errors['required']">
+                  El campo es requerido
+                </div>
+                <div *ngIf="nombre.errors['minlength']">
+                  El campo debe tener al menos 3 caracteres
+                </div>
+                <div *ngIf="nombre.errors['maxlength']">
+                  El campo debe tener menos de 80 caracteres
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="codigo">codigo</label>
+              <input
+                type="text"
+                class="form-control"
+                id="codigo"
+                name="codigo"
+                required
+                minlength="5"
+                maxlength="10"
+                [(ngModel)]="producto.codigo"
+
+                #codigo = "ngModel"
+
+              />
+<!--              poner que se puedan letras y numers -->
+              <div class = "alert alert-danger" *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)">
+                <div *ngIf="codigo.errors['required']">
+                  El campo es requerido
+                </div>
+                <div *ngIf="codigo.errors['minlength']">
+                  El campo debe tener al menos 5 caracteres
+                </div>
+                <div *ngIf="codigo.errors['maxlength']">
+                  El campo debe tener menos de 10 caracteres
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="descripcion">descripcion</label>
+              <input
+                type="text"
+                class="form-control"
+                id="descripcion"
+                name="descripcion"
+                minlength="5"
+                maxlength="500"
+                required
+                [(ngModel)]="producto.descripcion"
+
+                #descripcion = "ngModel"
+              />
+              <div class = "alert alert-danger" *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
+                <div *ngIf="descripcion.errors['required']">
+                  El campo es requerido
+                </div>
+                <div *ngIf="descripcion.errors['minlength']">
+                  El campo debe tener al menos 5 caracteres
+                </div>
+                <div *ngIf="descripcion.errors['maxlength']">
+                  El campo debe tener menos de 500 caracteres
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+              <label for="precio">precio</label>
+              <input
+                type="number"
+                class="form-control"
+                id="precio"
+                name="precio"
+                required
+                [(ngModel)]="producto.precio"
+
+                #precio = "ngModel"
+              />
+              <div class = "alert alert-danger" *ngIf="precio.invalid && (precio.dirty || precio.touched)">
+                <div *ngIf="precio.errors['required']">
+                  El campo es requerido
+                </div>
+            </div>
+            </div>
+
+            <button class = "btn btn-success" [disabled]="!productoForm.form.valid" >
+              Agregar Producto
+            </button>
+            <br><br>
+            <a appAuthCurrent [defaultRoute]=" '/login' " class="btn btn-danger">Pagina principal</a>
+
+<!--              <div *ngIf="error" class="error">{{error}}</div>-->
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

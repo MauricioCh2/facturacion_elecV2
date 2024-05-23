@@ -50,14 +50,14 @@
     </div>
 
     <!-- Botón para desplegar el canvas con la información del usuario -->
-    <button #elementosAOcultar class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasUsuario" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+    <button #elementosAOcultar class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasUsuario" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" *ngIf="currentUserService.getTipo() === 'PRO' || currentUserService.getTipo() === 'ADM'" >
       <span class="navbar-toggler-icon"></span>
     </button>
   </div>
 </nav>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="canvasUsuario" aria-labelledby="offcanvasNavbarLabel">
-  <app-canvas-usuario></app-canvas-usuario>
+  <app-canvas-usuario *ngIf="currentUserService.isUserLogged()" [currentUser]="currentUser"></app-canvas-usuario>
 </div>
 
 <!--<div class="canvas collapse justify-content-between" id="infonavBar" data-bs-theme="dark" data-bs-scroll="true" tabindex="-1" >-->
