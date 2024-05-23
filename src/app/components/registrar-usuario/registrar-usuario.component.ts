@@ -4,6 +4,7 @@ import {UsuarioService} from "../../services/usuario.service";
 import {Router} from "@angular/router";
 import {CurrentUserService} from "../../services/current-user.service";
 import {toolbox} from "../../utiles/toolbox";
+import Swal from 'sweetalert2';
 
 
 
@@ -31,6 +32,12 @@ export class RegistrarUsuarioComponent implements  OnInit{
 
     this.editMode = false;
     this.usuario = new Usuario();
+    this.usuario.aprobado = 'ESP';
+    this.usuario.tipo = 'PRO';
+    this.usuario.idUsuario = '';
+    this.usuario.nombre = ''; 
+    this.usuario.contrasenia = '';
+      
   }
   }
 guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o actuializr
@@ -51,12 +58,11 @@ guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o 
       },
       error => {
         console.log(error);
-        toolbox.notificacionEstandar("Error", ("A habido un error " + error), "error");
-
-
+        toolbox.notificacionEstandar("Error", "El proveedor NO esta registrado en Hacienda!!!!", "error");
       }
     );
   }
+
 
   goToLogin(){
     this.router.navigate(['/login']);
