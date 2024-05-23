@@ -10,6 +10,9 @@ import {ProductoService} from "../../../services/producto.service";
 import {Facturas} from "../../../entities/facturas";
 import {Detalle} from "../../../entities/detalle";
 import {FacturasService} from "../../../services/facturas.service";
+import swal from "sweetalert2";
+import Swal from "sweetalert2";
+import {toolbox} from "../../../utiles/toolbox";
 
 @Component({
   selector: 'app-facturar',
@@ -25,6 +28,8 @@ export class FacturarComponent implements OnInit{
   detalles: Detalle[];
   contador : number = 0;
   total: number = 0;
+  protected error: string;
+
 
   constructor(private currentService: CurrentUserService, private clienteService: ClienteService, private productoService: ProductoService, private facturaService : FacturasService){
     this.detalles = []; //lo inicializa como vector vacio
@@ -83,6 +88,7 @@ export class FacturarComponent implements OnInit{
   }
 
   agregarProducto() {
+    toolbox.printf(toolbox.colors.BLUE + this.productoActual.nombre);
     //this.productos.push(this.productoActual);
     let detalle : Detalle = new Detalle();
     //despues hacer que esto en el back busque el id no el codigo
@@ -108,11 +114,56 @@ export class FacturarComponent implements OnInit{
   remDet(detalle: any) {
     if (detalle.cantidad > 0) {
       detalle.cantidad--;
+      if(detalle.cantidad == 0){
+        this.detalles = this.detalles.filter(d => d.numDetalle !== detalle.numDetalle);
+        //vuelve a crear un array sin el detalle que se elimino
+      }
       this.calcularTotal();
     }
+
   }
 
   onSubmit() {
+    if(!this.clienteActual){
+      this.error = 'Debe seleccionar un cliente';
+    }else if (this.detalles.length === 0){
+      this.error = 'Debe agregar al menos un producto';
+    }else {
+      this.error = '';
+      let detallesFactura = '';
+      for (let detalle of this.detalles) {
+        let producto = this.productos.find(p => p.idProducto === detalle.codigoProducto);
+        if (producto) {
+          detallesFactura += `<p>Producto: ${producto.nombre}, Cantidad: ${detalle.cantidad}, Precio Unitario: ${producto.precio}</p>`;
+        }
+      }
+
+      Swal.fire({
+        title: "Proceder con la factura? hacer mas estetico",
+        html: `
+      <h1>Detalles de la factura</h1>
+      <p>Proveedor: ${this.currentUser.nombre}</p>
+      <p>Cliente: ${this.clienteActual.nombreC}</p>
+      ${detallesFactura}
+      <p>Total: ${this.total}</p>
+    `,
+        showCancelButton: true,
+        confirmButtonText: "Facturar",
+        showLoaderOnConfirm: true,
+        preConfirm: async (login) => {},
+        allowOutsideClick: () => !Swal.isLoading()
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.generarFactura();
+        }
+      });
+
+
+    }
+
+
+  }
+  generarFactura(){
     console.log("estoy en el submit");
     let factura: Facturas = new Facturas();
     factura.identificacionCliente = this.clienteActual.idCliente;
@@ -125,6 +176,7 @@ export class FacturarComponent implements OnInit{
     console.log("Sus detalles: "+ this.detalles.toString());
 
     this.facturaService.facturar(factura, this.detalles).subscribe(data => {
+      toolbox.notificacionEstandar("Factura generada", "La factura ha sido generada correctamente", "success");
       console.log(data);
     });
 

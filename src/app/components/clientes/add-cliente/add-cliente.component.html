@@ -15,8 +15,23 @@
                 id="identificacionC"
                 name="identificacionC"
                 [(ngModel)]="cliente.identificacionC"
+                minlength="3"
+                maxlength="20"
                 required
+                #identificacion = "ngModel"
               />
+              <div class = "alert alert-danger" *ngIf="identificacion.invalid && (identificacion.dirty || identificacion.touched)">
+                <div *ngIf="identificacion.errors['required']">
+                  El campo es requerido
+                </div>
+                <div *ngIf="identificacion.errors['minlength']">
+                  El campo debe tener al menos 3 caracteres
+                </div>
+                <div *ngIf="identificacion.errors['maxlength']">
+                  El campo debe tener menos de 20 caracteres
+                </div>
+              </div>
+
             </div>
             <div class="form-group">
               <label for="nombreC">Nombre</label>
@@ -26,8 +41,24 @@
                 id="nombreC"
                 name="nombreC"
                 [(ngModel)]="cliente.nombreC"
+                minlength="3"
+                maxlength="80"
                 required
+                #nombre = "ngModel"
+
               />
+              <div class = "alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                <div *ngIf="nombre.errors['required']">
+                  El campo es requerido
+                </div>
+                <div *ngIf="nombre.errors['minlength']">
+                  El campo debe tener al menos 3 caracteres
+                </div>
+                <div *ngIf="nombre.errors['maxlength']">
+                  El campo debe tener menos de 80 caracteres
+                </div>
+              </div>
+
             </div>
             <div class="form-group">
               <label for="correo">Correo</label>
@@ -38,7 +69,18 @@
                 name="correo"
                  [(ngModel)]="cliente.correo"
                 required
+                pattern ="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+                #correo_electronico = "ngModel"
               />
+              <div class = "alert alert-danger" *ngIf="correo_electronico.invalid && (correo_electronico.dirty || correo_electronico.touched)">
+                <div *ngIf="correo_electronico.errors['required']">
+                  El campo es requerido
+                </div>
+                <div *ngIf = "correo_electronico.errors['pattern']">
+                  Por favor digite el email con el siguiente formato : "usernamedirec.com
+                </div>
+              </div>
+
             </div>
             <div class="form-group">
               <label for="telefono">Teléfono</label>
@@ -49,7 +91,16 @@
                 name="telefono"
                 [(ngModel)]="cliente.telefono"
                 required
-              />
+                #telefono = "ngModel"
+              >
+              <div class = "alert alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
+                <div *ngIf="telefono.errors['required']">
+                  El campo es requerido
+                </div>
+                <div *ngIf="telefono.errors['pattern']">
+                  El teléfono solo puede contener números
+                </div>
+              </div>
             </div>
             <button type="submit" class="btn btn-primary mt-3" [disabled]="!clienteForm.form.valid">
               Agregar Cliente

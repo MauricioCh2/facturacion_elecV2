@@ -29,11 +29,11 @@ export class LoginComponent  implements  OnInit{
 
     }
 
-  login(){
+  private  login(){
     this.usuarioService.login(this.usuario).subscribe(async dato => {
 
         if (await this.validateAprob()) { //la promesa tiene que cumplirse antes de iniciar
-          this.currentUserService.login(dato);
+          this.currentUserService.login(dato); //agrega la sesion
           this.agregarTipo();
           console.log(dato);
 
