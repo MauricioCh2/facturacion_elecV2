@@ -51,9 +51,7 @@ guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o 
       },
       error => {
         console.log(error);
-        toolbox.notificacionEstandar("Error", ("A habido un error " + error), "error");
-
-
+        toolbox.notificacionEstandar("El proveedor NO esta registrado en hacienda", "El usuario no se ha podido registrar", "error");
       }
     );
   }
