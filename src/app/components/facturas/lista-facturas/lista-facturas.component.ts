@@ -23,4 +23,16 @@ export class ListaFacturasComponent implements OnInit{
       this.facturas = data;
     });
   }
+
+  detallar(idFactura: number) {
+    
+  }
+
+  pdf(idFactura: number) {
+    
+  }
+
+  xml(idFactura: number) {
+    
+  }
 }

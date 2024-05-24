@@ -19,6 +19,7 @@ import {CurrentUserService} from "./services/current-user.service";
 import { AuthCurrentDirective } from './directivas/auth-current.directive';
 import { FacturarComponent } from './components/facturas/facturar/facturar.component';
 import { ListaFacturasComponent } from './components/facturas/lista-facturas/lista-facturas.component';
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -37,12 +38,13 @@ import { ListaFacturasComponent } from './components/facturas/lista-facturas/lis
     FacturarComponent,
     ListaFacturasComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        NgOptimizedImage,
+    ],
   providers: [
     provideClientHydration()
   ],

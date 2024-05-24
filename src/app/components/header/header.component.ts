@@ -10,7 +10,9 @@ import {
 } from '@angular/core';
 import {CurrentUserService} from "../../services/current-user.service";
 import {Subscription} from "rxjs";
-import { colorConsole } from './../../color-console.js';
+import { colorConsole } from '../../utiles/color-console.js';
+import {Usuario} from "../../entities/usuario";
+import {toolbox} from "../../utiles/toolbox";
 
 @Component({
   selector: 'app-header',
@@ -20,11 +22,15 @@ import { colorConsole } from './../../color-console.js';
 export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 @ViewChildren('elementosAOcultar') elementosAOcultar: QueryList<ElementRef>;
 private authStatusSubscription: Subscription;
+  currentUser: Usuario;
 
   constructor(private renderer: Renderer2, protected currentUserService: CurrentUserService) {}
 
   ngOnInit() {
-    console.log( colorConsole.RED + "Esta logeado alguien? " +this.currentUserService.isUserLogged());
+
+    this.currentUser = this.currentUserService.getCurrentUser();
+
+    toolbox.printf(toolbox.colors.ORANGE + "Esta logeado alguien? " +this.currentUserService.isUserLogged());
  // colorConsole.printf(colorConsole.RED +"Esta logeado alguien? " +this.currentUserService.isUserLogged());
     this.authStatusSubscription = this.currentUserService.authStatus$.subscribe((isLoggedIn) => {
       this.ocultarElementos(isLoggedIn);
@@ -32,13 +38,13 @@ private authStatusSubscription: Subscription;
   }
 
   ngAfterViewInit() {//cuando se inicializa la vista llama ekl metodo
-    console.log(" \x1b[31m"+ " Estoy en after, Esta logeado alguien? " +this.currentUserService.isUserLogged()+ "\x1b[0m");
+    toolbox.printf(toolbox.colors.ORANGE + "Estoy en after, Esta logeado alguien? " +this.currentUserService.isUserLogged());
 
     this.ocultarElementos(this.currentUserService.isUserLogged());
   }
 
   ngOnDestroy() {
-    console.log(" \x1b[31m"+ " Estoy en destroy , Esta logeado alguien? " +this.currentUserService.isUserLogged()+ "\x1b[0m");
+    toolbox.printf(toolbox.colors.ORANGE + "Estoy en destroy, Esta logeado alguien? " +this.currentUserService.isUserLogged());
 
     this.authStatusSubscription.unsubscribe();
   }

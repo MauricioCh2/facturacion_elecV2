@@ -1,5 +1,5 @@
 <div class="col-md-6 offset-md-3">
-  <h3 class = "text-center"> Registro </h3>
+  <h3 class="text-center">{{ editMode ? 'Edición' : 'Registro' }}</h3>
   <form (ngSubmit)="onSubmit()" #usuarioForm = "ngForm" class = "row g-3">
     <label for="idUsuario" class="form-label">Cedula:</label>
     <div class="col-md-6 input-group">
@@ -12,12 +12,13 @@
              maxlength="12"
              placeholder="Digite su cedula"
              #idUsuario = "ngModel"
+             [disabled]="editMode"
       >
     <div class="col-md-1">
       <label for="tipo" class="input-group-text" >Tipo</label>
     </div>
-    <div class="col-md-3">
-      <select class="form-select" id="tipo" name="tipoCedula" [(ngModel)]="usuario.tipoCedula">
+    <div class="col-md-3" >
+      <select class="form-select" id="tipo" name="tipoCedula" [(ngModel)]="usuario.tipoCedula" [disabled]="editMode">
         <option value="FIS">Físico</option>
         <option value="JUR">Jurídico</option>
       </select>
@@ -70,15 +71,22 @@
 
     <div class="form-group">
       <label for="contrasena" class="etiqueta">Contraseña:</label>
-      <input type="password"
+      <input
+        type="password"
+
              class="form-control"
              id="contrasena"
              name="contrasena"
              required
              minlength="8"
              [(ngModel)]="usuario.contrasenia"
+
+
              #contrasena = "ngModel"
+
+
       >
+<!--       pattern="/^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/"-->
       <div class = "alert alert-danger" *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)">
         <div *ngIf="contrasena.errors['required']">
           El campo es requerido
@@ -86,11 +94,20 @@
         <div *ngIf="contrasena.errors['minlength']">
           La contraseña debe tener al menos 8 caracteres
         </div>
+        <div *ngIf="contrasena.errors['pattern']">
+          prueba de regex
+        </div>
+
       </div>
     </div>
 
 
-    <button class="btn btn-success" [disabled]="!usuarioForm.form.valid" >Guardar</button>
+    <button class="btn btn-success" [disabled]="!usuarioForm.form.valid" >
+<!--      Si  es para guardar el boton dira guardar si es para actualizar el boton dira actualizar-->
+      <p class="text-center">{{ editMode ? 'Actualizar' : 'Guardar' }}</p>
+    </button>
+    <!--      Conecta con la directivca y te lleva a esa ruta por defecto-->
+    <a appAuthCurrent [defaultRoute]=" '/login' " class="btn btn-danger">Pagina principal</a>
   </form>
 
 </div>

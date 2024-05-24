@@ -5,11 +5,17 @@
 <div class="offcanvas-body">
   <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
     <li class="nav-item">
-      <p class="nav-text" >
-        Aqui va a ir la informacion del usuario/provedor
-
-        Quisque sollicitudin ut velit ut feugiat. Donec lacinia neque quis maximus fringilla. Nam mollis dictum gravida. Praesent congue commodo neque sed consequat. Morbi nec elementum nisl. Donec non erat ac elit pulvinar volutpat ut quis justo. In id ipsum id justo placerat rutrum. Integer porta rhoncus aliquet. Quisque malesuada, purus et feugiat consequat, enim tellus luctus eros, sit amet elementum felis ipsum sit amet urna. Quisque a lectus blandit, lacinia lectus quis, condimentum odio.
+      <p class="nav-text"  >
+        Informacion:
       </p>
+      <div *ngIf="currentUser">
+        Nombre: {{ currentUser.nombre }}
+        <br />
+        Identificación: {{ currentUser.idUsuario }}
+        <br />
+        Tipo de Cédula: {{ currentUser.tipoCedula }}
+      </div>
+
     </li>
     <li class="nav-item">
       <button class="btn btn-info" (click)="actualizarUsuario()">Editar</button>
