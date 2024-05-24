@@ -13,6 +13,7 @@ import {FacturasService} from "../../../services/facturas.service";
 import swal from "sweetalert2";
 import Swal from "sweetalert2";
 import {toolbox} from "../../../utiles/toolbox";
+import {combineLatestAll} from "rxjs";
 
 @Component({
   selector: 'app-facturar',
@@ -29,6 +30,7 @@ export class FacturarComponent implements OnInit{
   contador : number = 0;
   total: number = 0;
   protected error: string;
+  nombreOrIdProducto: string = '';
 
 
   constructor(private currentService: CurrentUserService, private clienteService: ClienteService, private productoService: ProductoService, private facturaService : FacturasService){
@@ -68,7 +70,7 @@ export class FacturarComponent implements OnInit{
     });
   }
 
-  private buscarCliente(texto : string){
+  protected buscarCliente(texto: string){
     return this.clientes.filter(producto =>
       producto.identificacionC.includes(texto) || producto.nombreC.includes(texto));
   }
@@ -77,8 +79,44 @@ export class FacturarComponent implements OnInit{
       producto.idProducto.includes(texto) || producto.nombre.includes(texto));
   }
 
+  protected existeProducto(texto: string){
+   let aux : Productos;
+    if(texto !== ''){
+      console.log("Buscando producto con texto: "+ texto);
+       aux = this.productos.find(producto =>
+        producto.idProducto.toString().includes(texto) || producto.nombre.toString().includes(texto));
+       if(aux!== undefined){
+          this.productoActual = aux;
+          return true;
+       }
+      return false;
+    }else{
+      return false;
+    }
+  }
+  protected existeCliente(texto: string){
+    let aux : Cliente;
+    if(texto !== ''){
+      console.log("Buscando cliente con texto: "+ texto);
+      aux = this.clientes.find(cliente =>
+        cliente.identificacionC.toString().includes(texto) || cliente.nombreC.toString().includes(texto));
+      if(aux!== undefined){
+        return true;
+      }
+      return false;
+    }else{
+      return false;
+    }
+  }
+
   seleccionarCliente(cliente: Cliente) {
-    this.clienteActual = cliente;
+    toolbox.printf(toolbox.colors.BLUE +"Cliente actual:  "+ cliente.nombreC);
+    console.log(cliente);
+    if(this.existeCliente(cliente.nombreC)){
+      this.clienteActual = cliente;
+    }else{
+      this.error = 'Error ese cliente no existe en la base de datos' ;
+    }
   }
 
 
@@ -87,23 +125,28 @@ export class FacturarComponent implements OnInit{
     this.productoActual = producto;
   }
 
-  agregarProducto() {
-    toolbox.printf(toolbox.colors.BLUE + this.productoActual.nombre);
-    //this.productos.push(this.productoActual);
-    let detalle : Detalle = new Detalle();
-    //despues hacer que esto en el back busque el id no el codigo
-    detalle.codigoProducto = this.productoActual.idProducto;
-    //cambiar a descripcion producto
-    detalle.descripcionDetalle = this.productoActual.descripcion;
-    detalle.cantidad = 1;
-    //hacer un id detalle y un num Detalle
-    detalle.numDetalle = this.contador++;
-    //no se si hara falta un precio y valor final
-    //por impuestos y eso
-    detalle.valorProductos = this.productoActual.precio;
-    this.detalles.push(detalle);
-    this.calcularTotal();
-    this.productoActual = new Productos();  // Limpiar el producto actual
+  agregarProducto(texto: string = '') {
+    if(this.existeProducto(texto)){
+      toolbox.printf(toolbox.colors.BLUE + this.productoActual.nombre);
+      //this.productos.push(this.productoActual);
+      let detalle : Detalle = new Detalle();
+      //despues hacer que esto en el back busque el id no el codigo
+      detalle.codigoProducto = this.productoActual.idProducto;
+      //cambiar a descripcion producto
+      detalle.descripcionDetalle = this.productoActual.descripcion;
+      detalle.cantidad = 1;
+      //hacer un id detalle y un num Detalle
+      detalle.numDetalle = this.contador++;
+      //no se si hara falta un precio y valor final
+      //por impuestos y eso
+      detalle.valorProductos = this.productoActual.precio;
+      this.detalles.push(detalle);
+      this.calcularTotal();
+      this.productoActual = new Productos();  // Limpiar el producto actual
+    }else{
+      this.error = 'Debe ingresar un producto valido';
+    }
+
   }
 
   addDet(detalle: any) {
@@ -124,8 +167,9 @@ export class FacturarComponent implements OnInit{
   }
 
   onSubmit() {
-    if(!this.clienteActual){
+    if(this.clienteActual.idCliente === undefined || this.clienteActual.idCliente === null){
       this.error = 'Debe seleccionar un cliente';
+      return;
     }else if (this.detalles.length === 0){
       this.error = 'Debe agregar al menos un producto';
     }else {
@@ -168,8 +212,7 @@ export class FacturarComponent implements OnInit{
     let factura: Facturas = new Facturas();
     factura.identificacionCliente = this.clienteActual.idCliente;
     factura.identificacionUsuario = this.currentUser.idUsuario;
-    this.calcularTotal();
-    factura.valorFinal = this.total;
+    factura.valorTotal = this.total;
 
 
     console.log("Factura: "+ factura.toString());
@@ -178,6 +221,10 @@ export class FacturarComponent implements OnInit{
     this.facturaService.facturar(factura, this.detalles).subscribe(data => {
       toolbox.notificacionEstandar("Factura generada", "La factura ha sido generada correctamente", "success");
       console.log(data);
+
+      // Limpiar los campos
+      this.clienteActual = new Cliente();
+      this.detalles = [];
     });
 
   }

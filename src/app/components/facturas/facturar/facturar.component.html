@@ -43,7 +43,10 @@
                    class="form-control"
                    aria-label="Text input with dropdown button"
                    [value]="productoActual.nombre ?? ' '"
+                   [(ngModel)]="productoActual.nombre"
+                   name = "producto"
                    required
+
 
             >
 
@@ -55,7 +58,7 @@
               <li><hr class="dropdown-divider"></li>
             </ul>
             <button type="button" class = "btn btn-outline-secondary "> L </button>
-            <button type="button" class="btn btn-outline-secondary" [disabled]="productoActual!==undefined" (click)="agregarProducto()"> + </button>
+            <button type="button" class="btn btn-outline-secondary"  (click)="agregarProducto(productoActual.nombre)"> + </button>
           </div>
 
 
@@ -89,7 +92,8 @@
             {{ total }}
           </p>
 <!--          aqui iria el monto final-->
-          <button class="btn btn-primary"  [disabled]="clienteActual!==undefined || detalles.length === 0  || !facturaForm.form.valid">Agregar</button>
+          <button class="btn btn-primary"  >Agregar</button>
+<!--      [disabled]="clienteActual===undefined || detalles.length !== 0"-->
           <div *ngIf="error" class="error">{{error}}</div>
     </form>
 
