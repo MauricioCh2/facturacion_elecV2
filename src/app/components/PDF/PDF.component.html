@@ -1,0 +1,159 @@
+<h1 xmlns="http://www.w3.org/1999/html"></h1>
+
+<button (click)="generatePDF()"> Create PDF</button>
+
+
+
+<h1>Factura Electronica</h1>
+<h5>25/05/2024</h5>
+<p>
+  Datos del proveedor <br>
+  Nombre<br>
+  Direccion<br>
+  Tel:<br>
+  Cedula:<br>
+  email:<br>
+</p>
+
+<h2>Factura Electronica No.</h2>
+<h3>Clave:</h3>
+
+<table id="tablaCliente">
+  <thead>
+  <tr>
+    <th>Informacion del Cliente:</th>
+    <th>Detalles:</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tr>
+    <td>Nombre</td>
+    <td>Referencia interna No</td>
+    <td>43103</td>
+  </tr>
+  <tr>
+    <td>Cedula</td>
+    <td>E-mail</td>
+    <td>mauricio&#64;gmail.com</td>
+  </tr>
+  <tr>
+    <td>Direccion</td>
+    <td>Agente de ventas</td>
+    <td>Michael Quesada</td>
+  </tr>
+  <tr>
+    <td>Telefono</td>
+    <td>Terminos de pago</td>
+    <td>Pago de contado</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Fecha de vencimiento</td>
+    <td>16/08/2024</td>
+  </tr>
+</table>
+
+<br><br><br>
+
+<table id="tablaDetalle">
+  <thead>
+  <tr>
+    <th>Producto</th>
+    <th>Descripcion</th>
+    <th>Cantidad</th>
+    <th>Precio Unitario</th>
+    <th>Total</th>
+  </tr>
+  </thead>
+  <tr>
+    <td>Tomate</td>
+    <td>Verdura</td>
+    <td>6</td>
+    <td>150</td>
+    <td>900</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>*** ULTIMA LINEA ***</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<table id="tablaImpuestos">
+  <tr>
+    <td>Impuestos:</td>
+    <td>IVA - Tarifa Plena 13%</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Forma de pago:</td>
+    <td>01 - Efectivo CRC</td>
+    <td> c5000</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Vuelto</td>
+    <td> c1000</td>
+  </tr>
+</table>
+
+<br><br><br>
+
+<table id="tablaInfo">
+  <tr>
+    <td name="p">Terminos y Condiciones</td>
+    <td name="p" style="width: 300px">Recibido por:</td>
+    <td name="p">Subtotal Gravado</td>
+    <td>c3.539,82</td>
+  </tr>
+  <tr>
+    <td rowspan="7" style="text">
+      Esta factura devenga intereses del 3% mensual después de su vencimiento.<br>
+      Renuncio a mi domicilio y los trámites de juicio ejecutivo según el Articulo 460<br>
+      del Código de Comercio,<br>
+      ** Un año de garantia, por defectos de fábrica.
+    </td>
+    <td></td>
+    <td name="p">Descuento Gravado:</td>
+    <td>c0.0</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td name="p">Subtotal Exento:</td>
+    <td>c0.0</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td name="p">Descuento Exento:</td>
+    <td>c0.0</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td name="p">Impuestos:</td>
+    <td>c0.0</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td name="p">Total:</td>
+    <td>c0.0</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td name="p">Otros:</td>
+    <td>c0.0</td>
+  </tr>
+  <tr>
+    <td style="text-align: center">(Firma)</td>
+    <td name="p">Total a pagar:</td>
+    <td>c0.0</td>
+  </tr>
+</table>
+
+<h5>Emitida conforme lo establecido en la resolución de Facturación Electrónica No. DGT-R-033-2019 del 20-Jun-2019 de la D.G.T,D. Versión 4.3, Factura electrónica
+  generada por WateCloud (www.watefact.com).</h5>
+
+<h5>Emitida el dia 25 del mes de Mayo del año 2024</h5>
+
