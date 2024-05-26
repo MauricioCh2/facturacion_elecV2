@@ -12,7 +12,10 @@ export class ClienteService {
   getClientesByProveedorId(id: string): Observable<Cliente> {
     return this.httpClient.get<Cliente>(`${this.baseURL}/${id}`);
   }
- 
+  getClienteById(id: string): Observable<Cliente> {
+    const idcliente = parseInt(id);
+    return this.httpClient.get<Cliente>(`${this.baseURL}/findById/${idcliente}`);
+  }
 
 
 
