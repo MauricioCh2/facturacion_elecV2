@@ -7,5 +7,5 @@ export class Detalle {
 
     descripcionDetalle: string;
 
-   valorProductos: number;
+    valorProductos: number;
 }

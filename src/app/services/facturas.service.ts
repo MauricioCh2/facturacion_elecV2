@@ -30,4 +30,12 @@ export class FacturasService {
     return this.httpClient.post(`${this.baseURL}`, facturaConDetalles);
 
   }
+
+  getFacturaPorId(id: number): Observable<Facturas> {
+    return this.httpClient.get<Facturas>(`${this.baseURL}/${id}`);
+  }
+
+  obtenerDetallesDeFactura(id: number): Observable<Detalle[]> {
+    return this.httpClient.get<Detalle[]>(`${this.baseURL}/${id}/detalles`);
+  }
 }
