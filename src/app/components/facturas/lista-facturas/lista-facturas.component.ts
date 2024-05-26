@@ -5,6 +5,7 @@ import {Detalle} from "../../../entities/detalle";
 import {Cliente} from "../../../entities/cliente";
 import {ClienteService} from "../../../services/cliente.service";
 import {Router} from "@angular/router";
+import {toolbox} from "../../../utiles/toolbox";
 
 @Component({
   selector: 'app-lista-facturas',
@@ -41,6 +42,8 @@ export class ListaFacturasComponent implements OnInit{
       this.factura = data;
     });
     this.clienteService.getClienteById(this.factura.identificacionCliente).subscribe(data => {
+      toolbox.printf(toolbox.colors.ORANGE+ "Obtengo los datos del cliente al detallar:");
+      console.log(data);
       this.cliente = data;
     });
   }
