@@ -34,6 +34,7 @@ export class RegistrarUsuarioComponent implements  OnInit{
   }
   }
 guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o actuializr
+
     this.usuario.aprobado = 'ESP';
     this.usuario.tipo = 'PRO';
     const operacion = this.editMode
@@ -80,4 +81,38 @@ guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o 
   }
 
 
+  getIdMinLength() {
+    switch (this.usuario.tipoCedula) {
+      case 'FIS':
+        return "9";
+      case 'EXT':
+        return "10";
+      case 'JUR':
+        return "10";
+      default:
+        return 0;
+    }
+  }
+
+  getIdMaxLength() {
+    switch (this.usuario.tipoCedula) {
+      case 'FIS':
+        return "9";
+      case 'EXT':
+        return "11";
+      case 'JUR':
+        return "10";
+      default:
+        return 0;
+    }
+  }
+
+
+
+  permitirSoloNumeros(evento: any) {
+    const valorIngresado = evento.target.value;
+    const valorFiltrado = valorIngresado.replace(/[^0-9]/g, '');
+    evento.target.value = valorFiltrado;
+    this.usuario.idUsuario = valorFiltrado;
+  }
 }

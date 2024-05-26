@@ -1,7 +1,7 @@
 export class Detalle {
     numDetalle: number;
 
-    codigoProducto: string;
+    codigoProducto: number;
 
     cantidad: number;
 
