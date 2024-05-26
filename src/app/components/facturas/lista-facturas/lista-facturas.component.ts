@@ -38,14 +38,14 @@ export class ListaFacturasComponent implements OnInit{
     });
   }
 
-  detallar(idFactura: number) {
-    this.facturasServicio.getDetallesByFacturaId(idFactura).subscribe(data => {
+  detallar(fac: Facturas) {
+    this.facturasServicio.getDetallesByFacturaId(fac.idFactura).subscribe(data => {
       this.detalles = data;
     });
-    this.facturasServicio.getFacturaById(idFactura).subscribe(data => {
+    this.facturasServicio.getFacturaById(fac.idFactura).subscribe(data => {
       this.factura = data;
     });
-    this.clienteService.getClienteById(this.factura.identificacionCliente).subscribe(data => {
+    this.clienteService.getClienteById(fac.identificacionCliente).subscribe(data => {
       toolbox.printf(toolbox.colors.ORANGE+ "Obtengo los datos del cliente al detallar:");
       console.log(data);
       this.cliente = data;
@@ -57,8 +57,8 @@ export class ListaFacturasComponent implements OnInit{
   }
 
   xml(idFactura: number) {
-    this.facturasServicio.getFacturaPorId(idFactura).subscribe(factura => {
-      this.facturasServicio.obtenerDetallesDeFactura(idFactura).subscribe(detalles => {
+    this.facturasServicio.getFacturaById(idFactura).subscribe(factura => {
+      this.facturasServicio.getDetallesByFacturaId(idFactura).subscribe(detalles => {
         const doc = create({version: '1.0'})
           .ele('factura', {
             'id': factura.idFactura,
@@ -85,7 +85,7 @@ export class ListaFacturasComponent implements OnInit{
 
         const link = document.createElement('a');
         link.href = xmlUrl;
-        link.download = 'factura.xml';
+        //link.download = 'factura.xml';
         document.body.appendChild(link);
 
         link.click();
