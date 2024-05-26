@@ -20,7 +20,6 @@ import { AuthCurrentDirective } from './directivas/auth-current.directive';
 import { FacturarComponent } from './components/facturas/facturar/facturar.component';
 import { ListaFacturasComponent } from './components/facturas/lista-facturas/lista-facturas.component';
 import {NgOptimizedImage} from "@angular/common";
-import { InputMaskDirectiveDirective } from './directivas/input-mask-directive.directive';
 
 @NgModule({
   declarations: [
@@ -38,6 +37,7 @@ import { InputMaskDirectiveDirective } from './directivas/input-mask-directive.d
     AuthCurrentDirective,
     FacturarComponent,
     ListaFacturasComponent,
+    DetallesFacturaComponent
     InputMaskDirectiveDirective
   ],
     imports: [

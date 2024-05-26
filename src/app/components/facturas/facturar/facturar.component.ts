@@ -131,7 +131,7 @@ export class FacturarComponent implements OnInit{
       //this.productos.push(this.productoActual);
       let detalle : Detalle = new Detalle();
       //despues hacer que esto en el back busque el id no el codigo
-      detalle.codigoProducto = this.productoActual.idProducto;
+      detalle.codigoProducto = this.productoActual.codigo;
       //cambiar a descripcion producto
       detalle.descripcionDetalle = this.productoActual.descripcion;
       detalle.cantidad = 1;
