@@ -42,7 +42,7 @@ guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o 
     operacion.subscribe(//sea cual sea la opcion imprime  la salida y redirije a la lista
       dato => {
         console.log(dato);
-        if(this.editMode == false) {
+        if(this.editMode === false) {
         toolbox.notificacionEstandar("Exito", ("El usuario: "+this.usuario.nombre + "a sido guardado correctamente"), "success");
         }else{
           toolbox.notificacionEstandar("Exito", ("El usuario: "+this.usuario.nombre + "a sido actualizado correctamente"), "success");
@@ -50,8 +50,11 @@ guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o 
         this.goToLogin();
       },
       error => {
-        console.log(error);
-        toolbox.notificacionEstandar("El proveedor NO esta registrado en hacienda", "El usuario no se ha podido registrar", "error");
+        console.error(error); // Muestra el error en la consola para depuración
+        const mensajeError = error?.error || "Ha ocurrido un error desconocido"; // Obtén el mensaje de error del objeto error
+
+        toolbox.notificacionEstandar("Error", `Ha habido un error: ${mensajeError}`, "error");
+
       }
     );
   }
@@ -63,5 +66,18 @@ guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o 
     console.log(this.usuario);
     this.guardarUsuario();
   }
+  getIdPattern() {
+    switch (this.usuario.tipoCedula) {
+      case 'FIS':
+        return '^\\d{1}-\\d{4}-\\d{4}$';
+      case 'EXT':
+        return '^1\\d{11}$|^1\\d{10}$';
+      case 'JUR':
+        return '^\\d+$';
+      default:
+        return '';
+    }
+  }
+
 
 }
