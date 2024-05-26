@@ -25,14 +25,15 @@ export class ListaFacturasComponent implements OnInit{
   }
 
   detallar(idFactura: number) {
-    
+
   }
 
   pdf(idFactura: number) {
-    
+
   }
 
   xml(idFactura: number) {
-    
+
+
   }
 }

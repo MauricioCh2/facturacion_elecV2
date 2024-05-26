@@ -139,6 +139,7 @@ export class FacturarComponent implements OnInit{
       detalle.numDetalle = this.contador++;
       //no se si hara falta un precio y valor final
       //por impuestos y eso
+      console.log(this.productoActual.precio);
       detalle.valorProductos = this.productoActual.precio;
       this.detalles.push(detalle);
       this.calcularTotal();
