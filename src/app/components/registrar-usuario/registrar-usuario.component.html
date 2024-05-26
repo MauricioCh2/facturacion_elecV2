@@ -8,19 +8,23 @@
              id="idUsuario"
              name="idUsuario"
              [(ngModel)]="usuario.idUsuario"
-             minlength="3"
-             maxlength="12"
+             minlength="{{getIdMinLength()}}"
+             maxlength="{{ getIdMaxLength()}}"
+             required
              placeholder="Digite su cedula"
+             pattern="{{getIdPattern()}}"
              #idUsuario = "ngModel"
              [disabled]="editMode"
+             (ngModelChange)="permitirSoloNumeros($event)">
       >
     <div class="col-md-1">
       <label for="tipo" class="input-group-text" >Tipo</label>
     </div>
     <div class="col-md-3" >
-      <select class="form-select" id="tipo" name="tipoCedula" [(ngModel)]="usuario.tipoCedula" [disabled]="editMode">
+      <select class="form-select" id="tipo" name="tipoCedula" required [(ngModel)]="usuario.tipoCedula" [disabled]="editMode">
         <option value="FIS">Físico</option>
         <option value="JUR">Jurídico</option>
+        <option value="EXT">Extranjero</option>
       </select>
     </div>
     </div>
@@ -34,12 +38,24 @@
         <div *ngIf="idUsuario.errors['maxlength']">
           El id debe tener menos de 12 caracteres
         </div>
+        <div *ngIf="idUsuario.errors['pattern']">
+          <div *ngIf="usuario.tipoCedula === 'FIS'">
+              El id no cumple con el patrón requerido para fis
+          </div>
+          <div *ngIf="usuario.tipoCedula === 'EXT'">
+            El id no cumple con el patrón requerido para ext
+          </div>
+          <div *ngIf="usuario.tipoCedula === 'JUR'">
+            El id no cumple con el patrón requerido para jur
+          </div>
+
+        </div>
       </div>
 
 
 
     <div class="form-group">
-      <label for="nombre" class="etiqueta">Nombre:</label>
+      <label for="nombre" class="etiqueta">{{ usuario.tipoCedula === 'JUR' ? 'Razón Social' : 'Nombre' }}</label>
       <input type="text"
              class="form-control"
              id="nombre"
@@ -49,6 +65,7 @@
              minlength="3"
              maxlength="80"
              placeholder="Digite su nombre"
+             pattern="[a-zA-Z0-9 ]*"
              #nombre = "ngModel"
       >
       <!--      Si esll nombre esta sucio, es invalido-->
@@ -62,9 +79,13 @@
         <div *ngIf="nombre.errors['maxlength']">
           El campo debe tener menos de 80 caracteres
         </div>
-      </div>
-    </div>
+        <div *ngIf="nombre.errors['pattern']">
+        El campo solo puede contener letras y números
+        </div>
 
+      </div>
+
+    </div>
 
 
 

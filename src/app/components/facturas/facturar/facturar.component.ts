@@ -10,7 +10,6 @@ import {ProductoService} from "../../../services/producto.service";
 import {Facturas} from "../../../entities/facturas";
 import {Detalle} from "../../../entities/detalle";
 import {FacturasService} from "../../../services/facturas.service";
-import swal from "sweetalert2";
 import Swal from "sweetalert2";
 import {toolbox} from "../../../utiles/toolbox";
 import {combineLatestAll} from "rxjs";
@@ -27,7 +26,7 @@ export class FacturarComponent implements OnInit{
   clienteActual: Cliente = new Cliente();
   currentUser: Usuario;
   detalles: Detalle[];
-  contador : number = 0;
+  contador : number = 1;
   total: number = 0;
   protected error: string;
   nombreOrIdProducto: string = '';
@@ -74,10 +73,10 @@ export class FacturarComponent implements OnInit{
     return this.clientes.filter(producto =>
       producto.identificacionC.includes(texto) || producto.nombreC.includes(texto));
   }
-  private buscarProducto(texto : string){
-    return this.productos.filter(producto =>
-      producto.idProducto.includes(texto) || producto.nombre.includes(texto));
-  }
+  // private buscarProducto(texto : string){
+  //   return this.productos.filter(producto =>
+  //     producto.idProducto.includes(texto) || producto.nombre.includes(texto));
+  // }
 
   protected existeProducto(texto: string){
    let aux : Productos;
@@ -139,6 +138,7 @@ export class FacturarComponent implements OnInit{
       detalle.numDetalle = this.contador++;
       //no se si hara falta un precio y valor final
       //por impuestos y eso
+      console.log(this.productoActual.precio);
       detalle.valorProductos = this.productoActual.precio;
       this.detalles.push(detalle);
       this.calcularTotal();
@@ -190,7 +190,7 @@ export class FacturarComponent implements OnInit{
       <p>Cliente: ${this.clienteActual.nombreC}</p>
       ${detallesFactura}
       <p>Total: ${this.total}</p>
-    `,
+        `,
         showCancelButton: true,
         confirmButtonText: "Facturar",
         showLoaderOnConfirm: true,
