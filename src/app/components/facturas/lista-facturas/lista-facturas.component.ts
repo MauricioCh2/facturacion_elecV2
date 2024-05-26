@@ -1,7 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Facturas} from "../../../entities/facturas";
 import {FacturasService} from "../../../services/facturas.service";
+import {Detalle} from "../../../entities/detalle";
+import {Cliente} from "../../../entities/cliente";
+import {ClienteService} from "../../../services/cliente.service";
 import {Router} from "@angular/router";
+import {toolbox} from "../../../utiles/toolbox";
 
 @Component({
   selector: 'app-lista-facturas',
@@ -10,8 +14,14 @@ import {Router} from "@angular/router";
 })
 export class ListaFacturasComponent implements OnInit{
   facturas: Facturas[];
+  factura : Facturas;
+  cliente : Cliente;
+  detalles : Detalle[];
 
-  constructor(private facturasServicio: FacturasService, private router:Router){
+  constructor(private facturasServicio: FacturasService,private clienteService: ClienteService, private router:Router){
+    this.detalles = [];
+    this.factura = new Facturas();
+    this.cliente = new Cliente();
   }
 
   ngOnInit(): void {
@@ -22,5 +32,27 @@ export class ListaFacturasComponent implements OnInit{
     this.facturasServicio.getListaFacturas().subscribe(data => {
       this.facturas = data;
     });
+  }
+
+  detallar(idFactura: number) {
+    this.facturasServicio.getDetallesByFacturaId(idFactura).subscribe(data => {
+      this.detalles = data;
+    });
+    this.facturasServicio.getFacturaById(idFactura).subscribe(data => {
+      this.factura = data;
+    });
+    this.clienteService.getClienteById(this.factura.identificacionCliente).subscribe(data => {
+      toolbox.printf(toolbox.colors.ORANGE+ "Obtengo los datos del cliente al detallar:");
+      console.log(data);
+      this.cliente = data;
+    });
+  }
+
+  pdf(idFactura: number) {
+
+  }
+
+  xml(idFactura: number) {
+
   }
 }

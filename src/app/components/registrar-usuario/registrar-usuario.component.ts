@@ -4,7 +4,6 @@ import {UsuarioService} from "../../services/usuario.service";
 import {Router} from "@angular/router";
 import {CurrentUserService} from "../../services/current-user.service";
 import {toolbox} from "../../utiles/toolbox";
-import Swal from 'sweetalert2';
 
 
 
@@ -32,15 +31,10 @@ export class RegistrarUsuarioComponent implements  OnInit{
 
     this.editMode = false;
     this.usuario = new Usuario();
-    this.usuario.aprobado = 'ESP';
-    this.usuario.tipo = 'PRO';
-    this.usuario.idUsuario = '';
-    this.usuario.nombre = ''; 
-    this.usuario.contrasenia = '';
-      
   }
   }
 guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o actuializr
+
     this.usuario.aprobado = 'ESP';
     this.usuario.tipo = 'PRO';
     const operacion = this.editMode
@@ -49,7 +43,7 @@ guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o 
     operacion.subscribe(//sea cual sea la opcion imprime  la salida y redirije a la lista
       dato => {
         console.log(dato);
-        if(this.editMode == false) {
+        if(this.editMode === false) {
         toolbox.notificacionEstandar("Exito", ("El usuario: "+this.usuario.nombre + "a sido guardado correctamente"), "success");
         }else{
           toolbox.notificacionEstandar("Exito", ("El usuario: "+this.usuario.nombre + "a sido actualizado correctamente"), "success");
@@ -57,12 +51,14 @@ guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o 
         this.goToLogin();
       },
       error => {
-        console.log(error);
-        toolbox.notificacionEstandar("Error", "El proveedor NO esta registrado en Hacienda!!!!", "error");
+        console.error(error); // Muestra el error en la consola para depuración
+        const mensajeError = error?.error || "Ha ocurrido un error desconocido"; // Obtén el mensaje de error del objeto error
+
+        toolbox.notificacionEstandar("Error", `Ha habido un error: ${mensajeError}`, "error");
+
       }
     );
   }
-
 
   goToLogin(){
     this.router.navigate(['/login']);
@@ -71,5 +67,52 @@ guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o 
     console.log(this.usuario);
     this.guardarUsuario();
   }
+  getIdPattern() {
+    switch (this.usuario.tipoCedula) {
+      case 'FIS':
+        return '^\\d{1}-\\d{4}-\\d{4}$';
+      case 'EXT':
+        return '^1\\d{11}$|^1\\d{10}$';
+      case 'JUR':
+        return '^\\d+$';
+      default:
+        return '';
+    }
+  }
 
+
+  getIdMinLength() {
+    switch (this.usuario.tipoCedula) {
+      case 'FIS':
+        return "9";
+      case 'EXT':
+        return "10";
+      case 'JUR':
+        return "10";
+      default:
+        return 0;
+    }
+  }
+
+  getIdMaxLength() {
+    switch (this.usuario.tipoCedula) {
+      case 'FIS':
+        return "9";
+      case 'EXT':
+        return "11";
+      case 'JUR':
+        return "10";
+      default:
+        return 0;
+    }
+  }
+
+
+
+  permitirSoloNumeros(evento: any) {
+    const valorIngresado = evento.target.value;
+    const valorFiltrado = valorIngresado.replace(/[^0-9]/g, '');
+    evento.target.value = valorFiltrado;
+    this.usuario.idUsuario = valorFiltrado;
+  }
 }

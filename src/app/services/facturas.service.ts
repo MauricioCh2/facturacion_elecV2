@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {CurrentUserService} from "./current-user.service";
 import {Facturas} from "../entities/facturas";
 import {Observable} from "rxjs";
+import {Detalle} from "../entities/detalle";
+import {toolbox} from "../utiles/toolbox";
 
 @Injectable({
   providedIn: 'root'
@@ -18,4 +20,20 @@ export class FacturasService {
   }
 
 
+  facturar(factura: Facturas, detalles: Detalle[]) {
+    let facturaConDetalles = {
+      factura: factura,
+      detalles: detalles
+    };
+
+
+    return this.httpClient.post(`${this.baseURL}`, facturaConDetalles);
+
+  }
+  getDetallesByFacturaId(id: number): Observable<Detalle[]> {
+    return this.httpClient.get<Detalle[]>(`${this.baseURL}/detalles/${id}`);
+  }
+  getFacturaById(id: number): Observable<Facturas> {
+    return this.httpClient.get<Facturas>(`${this.baseURL}/getFactura/${id}`);
+  }
 }

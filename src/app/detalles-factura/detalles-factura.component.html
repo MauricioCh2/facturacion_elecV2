@@ -1,0 +1,30 @@
+<div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detallesModalLabel">Detalles de la Factura</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let detalle of detalles">
+          <p><strong>Número de Detalle:</strong> {{detalle.numDetalle}}</p>
+          <p><strong>Código del Producto:</strong> {{detalle.codigoProducto}}</p>
+          <p><strong>Cantidad:</strong> {{detalle.cantidad}}</p>
+          <p><strong>Descripción:</strong> {{detalle.descripcionDetalle}}</p>
+          <p><strong>Valor:</strong> {{detalle.valorProductos}}</p>
+          <hr>
+        </div>
+        <div *ngIf="factura">
+          <p><strong>identificacion Cliente:</strong> {{factura.identificacionCliente}}</p>
+          <p><strong>Nombre Cliente:</strong> {{cliente.nombreC}}</p>
+          <p><strong>Correo del cliente :</strong> {{cliente.correo}}</p>
+          <p><strong>Valor Total:</strong> {{factura.valorTotal}}</p>
+          <p><strong>Fecha:</strong> {{factura.fecha}}</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
