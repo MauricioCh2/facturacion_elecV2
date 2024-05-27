@@ -13,7 +13,7 @@ import {toolbox} from "../../utiles/toolbox";
 export class ListarProvedoresComponent implements OnInit {
   proveedores : Usuario[];
 
-
+//
   constructor(protected current: CurrentUserService , private usuarioServicio: UsuarioService, private router:Router){
   }
   ngOnInit(): void {
