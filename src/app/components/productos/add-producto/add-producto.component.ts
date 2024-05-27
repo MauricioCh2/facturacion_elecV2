@@ -5,7 +5,7 @@ import {CurrentUserService} from "../../../services/current-user.service";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
 import {toolbox} from "../../../utiles/toolbox";
-
+import {PrecioColonesPipe} from "../../../entities/precio-colones-pipe";
 @Component({
   selector: 'app-add-producto',
   templateUrl: './add-producto.component.html',
@@ -13,6 +13,7 @@ import {toolbox} from "../../../utiles/toolbox";
 })
 export class AddProductoComponent {
   producto: Productos = new Productos();
+  precioColones = new PrecioColonesPipe();
   protected error: string;
 
 
@@ -49,6 +50,12 @@ export class AddProductoComponent {
         } );
       }
     );
+  }
+  formatPrecio() {
+    if (this.producto.precio !== null) {
+      const precioString = this.producto.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      this.producto.precio = parseFloat(precioString.replace(/,/g, ''));
+    }
   }
 
   onSubmit(){
