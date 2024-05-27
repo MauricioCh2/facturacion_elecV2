@@ -69,6 +69,7 @@ export class ListaFacturasComponent implements OnInit {
               .ele('factura', {
                 'id': factura.idFactura
               })
+              .ele('Fecha').txt(String(factura.fecha)).up()
               .ele('Proveedor')
                 .ele('IdProveedor').txt(factura.identificacionUsuario).up()
                 .ele('Nombre').txt(usuario.nombre).up()
@@ -76,7 +77,6 @@ export class ListaFacturasComponent implements OnInit {
                 .up()
 
               .ele('Cliente')
-                .ele('IdCliente').txt(factura.identificacionCliente).up()
                 .ele('Identificacion').txt(cliente.identificacionC).up()
                 .ele('Nombre').txt(cliente.nombreC).up()
                 .ele('Correo').txt(cliente.correo).up()
@@ -92,14 +92,14 @@ export class ListaFacturasComponent implements OnInit {
                 .ele('Descripcion').txt(detalle.descripcionDetalle).up()
                 .ele('Valor')
                 .ele('ValorProducto').txt(String(detalle.valorProductos)).up()
-                .ele('Divisa').txt("CRC").up()
+                .ele('Divisa').txt("colones").up()
                 .up();
             });
 
-              doc.ele('Fecha').txt(String(factura.fecha)).up()
-                .ele('Valor')
-                .ele('ValorTotal').txt(String(factura.valorTotal)).up()
-                .ele('Divisa').txt("CRC").up()
+
+              doc.ele('ValorTotal')
+                .ele('MontoTotal').txt(String(factura.valorTotal)).up()
+                .ele('Divisa').txt("colones").up()
 
             const xmlString = doc.end({prettyPrint: true});
             const xmlBlob = new Blob([xmlString], {type: 'application/xml'});
