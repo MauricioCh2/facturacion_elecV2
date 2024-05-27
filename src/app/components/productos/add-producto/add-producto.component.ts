@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import Swal from "sweetalert2";
 import {toolbox} from "../../../utiles/toolbox";
 import {PrecioColonesPipe} from "../../../entities/precio-colones-pipe";
+import {Actividad} from "../../../entities/actividad";
 @Component({
   selector: 'app-add-producto',
   templateUrl: './add-producto.component.html',
@@ -15,9 +16,12 @@ export class AddProductoComponent {
   producto: Productos = new Productos();
   precioColones = new PrecioColonesPipe();
   protected error: string;
+  actividadActual : Actividad = new Actividad();
 
 
-  constructor(private productoService : ProductoService, private router:Router, private current  : CurrentUserService) {
+
+
+  constructor(private productoService : ProductoService, private router:Router, protected current  : CurrentUserService) {
     this.producto.proveedorP = current.getID();
   }
 
@@ -25,10 +29,12 @@ export class AddProductoComponent {
 
     this.productoService.registrarProductoPorId(this.producto).subscribe(
       dato => {
+
+
         console.log(dato);
         Swal.fire({
           title: 'Producto agregado',
-          text: `Cliente ${this.producto.nombre} ha sido agregado con éxito`,
+          text: `Producto  ${this.producto.nombre} ha sido agregado con éxito`,
           icon: 'success',
         }).then((result) => {
             if (result.value) {
@@ -39,9 +45,10 @@ export class AddProductoComponent {
 
       },
       error=> {console.log(error)
+
         Swal.fire({
           title: 'Error',
-          text: `Cliente ${this.producto.nombre} no se ha podido agregar`,
+          text: `El producto  ${this.producto.nombre} no se ha podido agregar`,
           icon: 'error',
         }).then((result) => {
           if (result.value) {
@@ -68,6 +75,11 @@ export class AddProductoComponent {
 
   getNombre() {
     return this.current.getNombre();
+  }
+
+  seleccionarActividad(act: any) {
+    this.actividadActual = act;
+    this.producto.idActividad = act.idActividad;
   }
 }
 

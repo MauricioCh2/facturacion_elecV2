@@ -61,13 +61,11 @@ export class ListaFacturasComponent implements OnInit{
       this.facturasServicio.getDetallesByFacturaId(idFactura).subscribe(detalles => {
         const doc = create({version: '1.0'})
           .ele('factura', {
-            'id': factura.idFactura,
-            'identificacionUsuario': factura.identificacionUsuario,
-            'identificacionCliente': factura.identificacionCliente,
-            'valorTotal': factura.valorTotal,
-            'fecha': factura.fecha
-          })
-          .ele('detalles');
+            'id': factura.idFactura})
+          .ele( 'identificacionUsuario').txt(factura.identificacionUsuario)
+          .ele( 'identificacionCliente').txt(factura.identificacionCliente).up()
+          .ele( 'valorTotal').txt(String(factura.valorTotal)).up()
+          .ele( 'fecha').txt(String(factura.fecha))
 
         detalles.forEach(detalle => {
           doc.ele('detalle', {
@@ -84,8 +82,12 @@ export class ListaFacturasComponent implements OnInit{
         const xmlUrl = URL.createObjectURL(xmlBlob);
 
         const link = document.createElement('a');
+
         link.href = xmlUrl;
+
         //link.download = 'factura.xml';
+
+
         document.body.appendChild(link);
 
         link.click();

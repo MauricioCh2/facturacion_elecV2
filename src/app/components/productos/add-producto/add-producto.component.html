@@ -134,6 +134,34 @@
               </div>
             </div>
 
+            <div class="input-group mb-3">
+              <p>Actividad comercial: </p>
+              <input type="text"
+                     class="form-control"
+                     aria-label="Text input with dropdown button"
+                     [value]="actividadActual.descripcion ?? ' '"
+                     [(ngModel)]="actividadActual.descripcion"
+                     name = "cliente"
+                     required
+                     #cliente = "ngModel"
+
+              >
+              <button type="button" class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li class="dropdown-item" *ngFor="let act of current.getActividad()">
+                  <a class="dropdown-item" (click)="seleccionarActividad(act)">{{act.descripcion}}</a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+              </ul>
+
+              <div class = "alert alert-danger" *ngIf="cliente.invalid && (cliente.dirty || cliente.touched)">
+                <div *ngIf="cliente.errors['required']">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
 
 
             <button class = "btn btn-success" [disabled]="!productoForm.form.valid" >

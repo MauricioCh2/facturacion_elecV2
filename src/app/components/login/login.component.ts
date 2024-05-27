@@ -31,6 +31,8 @@ export class LoginComponent  implements  OnInit{
 
   private  login(){
     this.usuarioService.login(this.usuario).subscribe(async dato => {
+        console.log("Estoy en el login ya me llego l dato: ");
+        console.log(dato);
 
         if (await this.validateAprob()) { //la promesa tiene que cumplirse antes de iniciar
           this.currentUserService.login(dato); //agrega la sesion
