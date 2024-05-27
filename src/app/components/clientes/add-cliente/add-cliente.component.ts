@@ -20,6 +20,7 @@ export class AddClienteComponent implements OnInit{
 
 onSubmit(){
   const userId = this.currentUser.getCurrentUser().idUsuario;
+  this.unformatCedula();
     this.usuarioService.addCliente(userId, this.cliente).subscribe(
       data =>{
         Swal.fire({
@@ -50,51 +51,18 @@ onSubmit(){
   );
 
 }
+  formatCedula(event: any) {
+    let value = event.target.value.replace(/\D/g, '');
+    if (value.length > 1) {
+      value = value.slice(0, 1) + '-' + value.slice(1);
+    }
+    if (value.length > 6) {
+      value = value.slice(0,6) + '-' + value.slice(6, 9);
+    }
+    this.cliente.identificacionC = value;
+  }
+  unformatCedula() {
+    this.cliente.identificacionC = this.cliente.identificacionC.replace(/-/g, '');
+  }
 
-
-
-  // onSubmit(){
-  //   const userId = this.currentUser.getCurrentUser().idUsuario;
-  //   this.clienteService.addCliente(userId, this.cliente).subscribe(
-  //     data => {
-  //       Swal({
-  //         title: 'Cliente agregado',
-  //         text: `Cliente ${this.cliente.nombreC} ha sido agregado con éxito`,
-  //         type: 'success',
-  //         cancelButtonText: 'No, cancelar',
-  //        confirmButtonClass: 'btn btn-success',
-  //        cancelButtonClass: 'btn btn-danger',
-  //       }).then((result) => {
-  //         if (result.value) {
-  //           this.router.navigate(['/clientes']);
-  //         }
-  //       }
-  //   );
-  // });
-  //       );
-//   swal({
-//          title: '¿Estas seguro?',
-//          text: "Confirma si deseas eliminar al empleado",
-//          type: 'warning',
-//          showCancelButton: true,
-//          confirmButtonColor: '#3085d6',
-//          cancelButtonColor: '#d33',
-//          confirmButtonText: 'Si , elimínalo',
-//          cancelButtonText: 'No, cancelar',
-//          confirmButtonClass: 'btn btn-success',
-//          cancelButtonClass: 'btn btn-danger',
-//          buttonsStyling: true
-//        }).then((result) => {
-//   if (result.value) {
-//   this.usuarioServicio.eliminarUsuario(id).subscribe(data => {
-//   this.obtenerUsuarios();
-//   swal(
-//   'Empleado eliminado',
-//   'El empleado ha sido eliminado con exito',
-//   'success'
-// )
-// });
-// }
-// })
-// }
 }

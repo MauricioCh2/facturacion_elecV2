@@ -15,6 +15,7 @@
                 id="identificacionC"
                 name="identificacionC"
                 [(ngModel)]="cliente.identificacionC"
+                (input)="formatCedula($event)"
                 minlength="3"
                 maxlength="20"
                 required
@@ -90,6 +91,7 @@
                 id="telefono"
                 name="telefono"
                 [(ngModel)]="cliente.telefono"
+
                 required
                 #telefono = "ngModel"
               >
