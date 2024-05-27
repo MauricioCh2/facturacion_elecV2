@@ -88,7 +88,8 @@ guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o 
   getIdPattern() {
     switch (this.usuario.tipoCedula) {
       case 'FIS':
-        return '^\\d{1}-\\d{4}-\\d{4}$';
+        // return '^\\d{1}-\\d{4}-\\d{4}$';
+        return '^\\d+$';
       case 'EXT':
         return '^1\\d{11}$|^1\\d{10}$';
       case 'JUR':

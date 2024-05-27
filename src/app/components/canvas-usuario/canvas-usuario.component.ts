@@ -48,24 +48,26 @@ export class CanvasUsuarioComponent implements  OnInit, OnDestroy{
   logout(){
 
     swal.fire({
-      title: '¿Estas seguro?',
-      text: "Confirma si deseas cerrar sesion",
-      icon: 'warning', // Cambiar 'type' por 'icon'
+      title: '¿Estás seguro?',
+      text: "Confirma si deseas cerrar sesión",
+      icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si , cerrar sesion',
+      confirmButtonText: 'Sí, cerrar sesión',
       cancelButtonText: 'No, cancelar',
       buttonsStyling: true
-    }).then(() => {
-      this.currentUserService.logout();
-      this.modalService.dismissAll(); // cierra todos los modales/offcanvas abiertos
-      this.router.navigate(['/login']);
-      swal.fire(
-        'Salio correctamente',
-        '',
-        'success'
-      )
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.currentUserService.logout();
+        this.modalService.dismissAll(); // cierra todos los modales/offcanvas abiertos
+        this.router.navigate(['/login']);
+        swal.fire(
+          'Salió correctamente',
+          '',
+          'success'
+        );
+      }
     })
 
   }

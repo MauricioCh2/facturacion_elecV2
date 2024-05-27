@@ -4,6 +4,9 @@ table {
 
 th{
 }
+.error{
+  color: red;
+}
 
 #tablaCliente{
   border-style: solid;
