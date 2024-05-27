@@ -4,6 +4,9 @@ import {UsuarioService} from "../../services/usuario.service";
 import {Router} from "@angular/router";
 import {CurrentUserService} from "../../services/current-user.service";
 import {toolbox} from "../../utiles/toolbox";
+import {ActividadAsignada} from "../../entities/actividad-asignada";
+import Swal from "sweetalert2";
+import {Actividad} from "../../entities/actividad";
 
 
 
@@ -15,6 +18,7 @@ import {toolbox} from "../../utiles/toolbox";
 export class RegistrarUsuarioComponent implements  OnInit{
   usuario : Usuario = new Usuario();
   editMode : boolean = false;
+  actividadesAsignadas : Actividad[];
 
 
   constructor(private usuarioService : UsuarioService, private router:Router, protected current : CurrentUserService) {
@@ -42,9 +46,23 @@ guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o 
       : this.usuarioService.registrarUsuario(this.usuario);
     operacion.subscribe(//sea cual sea la opcion imprime  la salida y redirije a la lista
       dato => {
+        toolbox.printf(toolbox.colors.ORANGE+"Estoy en guardar y el server retorno: ");
         console.log(dato);
-        if(this.editMode === false) {
-        toolbox.notificacionEstandar("Exito", ("El usuario: "+this.usuario.nombre + "a sido guardado correctamente"), "success");
+        if(this.editMode === false) {//si no esta editando
+          //carga la lista de actividaddes del back
+          // Verifica si data es un array o un objeto único
+          if (Array.isArray(dato)) {
+            this.actividadesAsignadas = dato;
+          } else {
+            // Si es un objeto único, lo agregas al array
+            if (dato instanceof Actividad) {
+              this.actividadesAsignadas.push(dato);
+            }
+          }
+          toolbox.notificacionEstandar("Tus actividades asignadas son: ",this.listar(this.actividadesAsignadas), "success");
+
+          //this.actividadesAsignadas = dato;
+        //toolbox.notificacionEstandar("Exito", ("El usuario: "+this.usuario.nombre + "a sido guardado correctamente"), "success");
         }else{
           toolbox.notificacionEstandar("Exito", ("El usuario: "+this.usuario.nombre + "a sido actualizado correctamente"), "success");
         }
@@ -114,5 +132,20 @@ guardarUsuario() {//esto es lo que pasa cuando se oprime el boton  de guardar o 
     const valorFiltrado = valorIngresado.replace(/[^0-9]/g, '');
     evento.target.value = valorFiltrado;
     this.usuario.idUsuario = valorFiltrado;
+  }
+
+
+
+  private listar (actividadAs: Actividad[]) {
+    let lista = '';
+    toolbox.printf(toolbox.colors.YELLOW+"Lista de actividades dada")
+
+    for (let actividad of actividadAs) {
+      toolbox.printf(toolbox.colors.YELLOW+actividad.idActividad)
+      toolbox.printf(toolbox.colors.YELLOW+actividad.descripcion)
+      lista += `Nombre ${actividad.descripcion},
+                Codigo: ${actividad.idActividad} \n`;
+    }
+    return lista;
   }
 }

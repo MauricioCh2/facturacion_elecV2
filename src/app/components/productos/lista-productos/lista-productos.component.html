@@ -1,15 +1,14 @@
-<h2> Lista de productos de: {{getNombre()}}  </h2>
-<button class ="btn btn-primary" routerLink="/add-producto" >Agregar producto </button>
+<h2> Lista de productos de: {{getNombre()}} </h2>
+<button class="btn btn-primary" routerLink="/add-producto">Agregar producto</button>
 
 <table class="table table-striped">
-  <thead class= "table-dark">
+  <thead class="table-dark">
   <tr>
     <th>ID</th>
     <th>Nombre</th>
-    <th>Codigo</th>
-    <th>Descripcion</th>
+    <th>Código</th>
+    <th>Descripción</th>
     <th>Precio</th>
-
   </tr>
   </thead>
   <tbody>
@@ -17,9 +16,8 @@
     <td>{{producto.idProducto}}</td>
     <td>{{producto.nombre}}</td>
     <td>{{producto.codigo}}</td>
-    <td>{{producto.descripcion }}</td>
-    <td>{{producto.precio }}</td>
+    <td>{{producto.descripcion}}</td>
+    <td>{{producto.precio | precioColones}}</td>
   </tr>
   </tbody>
-
 </table>

@@ -21,7 +21,7 @@
     <td>{{fac.fecha }}</td>
 <!--    <td>  <button (click)="detallar(fac.idFactura)" class = "btn btn-link"><img ngSrc="assets/images/detalles.png" alt="Detalles" height="50" width="50"> </button></td>-->
     <td>
-      <button (click)="detallar(fac.idFactura)" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#detallesModal">
+      <button (click)="detallar(fac)" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#detallesModal">
         <img src="assets/images/detalles.png" alt="Detalles" height="50" width="50">
       </button>
       <app-detalles-factura [detalles]="detalles" [factura]="factura" [cliente]="cliente"></app-detalles-factura>

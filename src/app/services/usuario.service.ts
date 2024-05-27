@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Usuario} from "../entities/usuario";
 import {Cliente} from "../entities/cliente";
+import {UsuarioYActividades} from "../entities/usuario-yactividades";
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class UsuarioService {
   }
 
   login(usuario: Usuario): Observable<any> {
-    return this.httpClient.post(`${this.baseURL}/login`, usuario);
+    return this.httpClient.post<UsuarioYActividades>(`${this.baseURL}/login`, usuario);
   }
   addCliente(id: string, cliente: Cliente): Observable<Cliente>{
     return this.httpClient.post<Cliente>(`${this.baseURL}/agregarCliente/${id}`, cliente);

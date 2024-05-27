@@ -1,3 +1,5 @@
+import {Actividad} from "./actividad";
+
 export class Usuario { //Nota, el nombre tiene que hacer match con las entidades en java
   idUsuario : string;
   nombre : string;
@@ -5,4 +7,5 @@ export class Usuario { //Nota, el nombre tiene que hacer match con las entidades
   tipo : string;
   tipoCedula : string;
   aprobado : string;
+  actividades : Actividad[];
 }

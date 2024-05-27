@@ -1,8 +1,11 @@
 export class Productos {
-  idProducto : number;
-  nombre : string;
+
+  idActividad : number;
   codigo : string;
   descripcion : string;
+  nombre : string;
   precio : number;
   proveedorP  : string;
+
+  idProducto : number;
 }

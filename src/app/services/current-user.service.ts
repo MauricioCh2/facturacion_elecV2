@@ -38,6 +38,8 @@ export class CurrentUserService {
               this.authStatusSource.next(true);
               this.currentUser.tipo = usuario.tipo;
               this.currentUser.tipo = usuario.nombre;
+              this.currentUser.actividades = usuario.actividades;
+
             }
           });
         } else {
@@ -56,6 +58,8 @@ export class CurrentUserService {
     if (typeof window !== 'undefined') {
       localStorage.setItem('currentUser', JSON.stringify(user));
     }
+    console.log("Prueba de que actividades llega:");
+    console.log(this.currentUser.actividades);
     this.authStatusSource.next(true); // Emitir evento de autenticación
   }
 
@@ -93,5 +97,9 @@ export class CurrentUserService {
   }
   public getID(): string{
     return this.currentUser.idUsuario;
+  }
+
+  getActividad() {
+    return this.currentUser.actividades;
   }
 }

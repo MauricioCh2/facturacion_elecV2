@@ -22,7 +22,7 @@ import { ListaFacturasComponent } from './components/facturas/lista-facturas/lis
 import {NgOptimizedImage} from "@angular/common";
 import {DetallesFacturaComponent} from "./detalles-factura/detalles-factura.component";
 import {InputMaskDirectiveDirective} from "./directivas/input-mask-directive.directive";
-
+import { SharedModule } from './shared/shared.module';  // Ajusta la ruta según tu estructura de carpetas
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +40,7 @@ import {InputMaskDirectiveDirective} from "./directivas/input-mask-directive.dir
     FacturarComponent,
     ListaFacturasComponent,
     DetallesFacturaComponent,
-    InputMaskDirectiveDirective
+    InputMaskDirectiveDirective,
   ],
     imports: [
         BrowserModule,
@@ -48,6 +48,7 @@ import {InputMaskDirectiveDirective} from "./directivas/input-mask-directive.dir
         HttpClientModule,
         FormsModule,
         NgOptimizedImage,
+        SharedModule
     ],
   providers: [
     provideClientHydration()
