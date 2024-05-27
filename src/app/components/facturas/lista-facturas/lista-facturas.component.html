@@ -1,11 +1,10 @@
-
 <h2> Lista de facturas del provedor </h2>
 <table class="table table-striped">
-  <thead class= "table-dark">
+  <thead class="table-dark">
   <tr>
     <th>ID</th>
     <th>Id del usuario</th>
-    <th>id cliente </th>
+    <th>id cliente</th>
     <th>Fecha</th>
     <th>Detalle</th>
     <th>PDF</th>
@@ -14,20 +13,24 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let fac of facturas" >
-    <td>{{fac.idFactura}}</td>
-    <td>{{fac.identificacionUsuario}}</td>
-    <td>{{fac.identificacionCliente}}</td>
-    <td>{{fac.fecha }}</td>
-<!--    <td>  <button (click)="detallar(fac.idFactura)" class = "btn btn-link"><img ngSrc="assets/images/detalles.png" alt="Detalles" height="50" width="50"> </button></td>-->
+  <tr *ngFor="let fac of facturas">
+    <td>{{ fac.idFactura }}</td>
+    <td>{{ fac.identificacionUsuario }}</td>
+    <td>{{ fac.identificacionCliente }}</td>
+    <td>{{ fac.fecha }}</td>
+    <!--    <td>  <button (click)="detallar(fac.idFactura)" class = "btn btn-link"><img ngSrc="assets/images/detalles.png" alt="Detalles" height="50" width="50"> </button></td>-->
     <td>
       <button (click)="detallar(fac)" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#detallesModal">
         <img src="assets/images/detalles.png" alt="Detalles" height="50" width="50">
       </button>
       <app-detalles-factura [detalles]="detalles" [factura]="factura" [cliente]="cliente"></app-detalles-factura>
     </td>
-    <td>  <button (click)="pdf(fac.idFactura)" class = "btn btn-link"><img ngSrc="assets/images/pdf.png" alt="PDF" height="50" width="50"> </button></td>
-    <td>  <button (click)="xml(fac.idFactura)" class = "btn btn-link"><img ngSrc="assets/images/xml.png" alt="XML" height="50" width="50"> </button></td>
+    <td>
+      <button (click)="pdf(fac.idFactura)" class="btn btn-link"><img ngSrc="assets/images/pdf.png" alt="PDF" height="50" width="50"></button>
+    </td>
+    <td>
+      <button (click)="xml(fac.idFactura)" class="btn btn-link"><img ngSrc="assets/images/xml.png" alt="XML" height="50" width="50"></button>
+    </td>
 
   </tr>
   </tbody>

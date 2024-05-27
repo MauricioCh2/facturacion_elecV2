@@ -1,3 +1,29 @@
-.error{
-color: red;
+
+table {
+}
+
+th{
+}
+
+#tablaCliente{
+  border-style: solid;
+}
+
+#tablaCliente th{
+  background-color: deepskyblue;
+}
+
+#tablaDetalle th{
+  border-style: solid;
+}
+
+#tablaInfo{
+}
+
+#tablaInfo{
+  border-style: solid;
+}
+
+td[name="p"]{
+  background-color: deepskyblue;
 }
