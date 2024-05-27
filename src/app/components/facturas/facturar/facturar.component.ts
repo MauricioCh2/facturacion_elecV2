@@ -239,5 +239,4 @@ export class FacturarComponent implements OnInit{
       }
     }
   }
-
 }
