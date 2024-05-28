@@ -129,9 +129,9 @@ export class FacturarComponent implements OnInit{
     this.productoActual = producto;
   }
 
-  agregarProducto(texto: string = '') {
-    if(this.existeProducto(texto)){
-      if(!this.noRepetido(texto)) {
+  agregarProducto(prod: Productos ) {
+    if(this.existeProducto(prod.nombre)){
+     // if(!this.noRepetido(prod.codigo)) {
         toolbox.printf(toolbox.colors.BLUE + this.productoActual.nombre);
         //this.productos.push(this.productoActual);
         let detalle: Detalle = new Detalle();
@@ -152,9 +152,9 @@ export class FacturarComponent implements OnInit{
       }else{
         this.error = 'Ya se ha agregado este producto';
       }
-    }else{
-      this.error = 'Debe ingresar un producto valido';
-    }
+   // }else{
+   //   this.error = 'Debe ingresar un producto valido';
+   // }
 
   }
 
