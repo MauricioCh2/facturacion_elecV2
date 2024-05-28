@@ -42,7 +42,7 @@ export class ListaFacturasComponent implements OnInit {
     this.obtenerFacturas();
   }
 
-  private obtenerFacturas(){
+  private obtenerFacturas() {
     this.facturasServicio.getListaFacturas().subscribe(data => {
       this.facturas = data;
     });
@@ -131,7 +131,6 @@ export class ListaFacturasComponent implements OnInit {
                                       Versión 4.3, Factura electrónica generada por WateCloud (www.watefact.com).`, 15, posY);
 
 
-
             doc.save(`${factura.idFactura}`);
           });
         });
@@ -162,7 +161,7 @@ export class ListaFacturasComponent implements OnInit {
               .ele('Telefono').txt(cliente.telefono).up()
               .up()
 
-              .ele('Detalles');
+              .ele('Detalles')
             detalles.forEach(detalle => {
               doc.ele('Detalle')
                 .ele('NumDetalle').txt(String(detalle.numDetalle)).up()
@@ -173,10 +172,10 @@ export class ListaFacturasComponent implements OnInit {
                 .ele('ValorProducto').txt(String(detalle.valorProductos)).up()
                 .ele('Divisa').txt("colones").up()
                 .up();
-            });
+            })
 
-
-            doc.ele('ValorTotal')
+            doc.up()
+              .ele('ValorTotal')
               .ele('MontoTotal').txt(String(factura.valorTotal)).up()
               .ele('Divisa').txt("colones").up()
 
