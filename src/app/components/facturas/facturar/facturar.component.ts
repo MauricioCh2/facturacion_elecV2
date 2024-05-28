@@ -73,10 +73,15 @@ export class FacturarComponent implements OnInit{
     return this.clientes.filter(producto =>
       producto.identificacionC.includes(texto) || producto.nombreC.includes(texto));
   }
-  // private buscarProducto(texto : string){
-  //   return this.productos.filter(producto =>
-  //     producto.idProducto.includes(texto) || producto.nombre.includes(texto));
-  // }
+  private buscarProducto(texto : string){
+    return this.productos.find(producto =>
+      producto.idProducto.toString().includes(texto) || producto.nombre.includes(texto));
+  }
+
+  private buscarProductoPorNombre(texto : string){
+    return this.productos.find(producto =>
+      producto.nombre.includes(texto));
+  }
 
   protected existeProducto(texto: string){
    let aux : Productos;
@@ -126,23 +131,27 @@ export class FacturarComponent implements OnInit{
 
   agregarProducto(texto: string = '') {
     if(this.existeProducto(texto)){
-      toolbox.printf(toolbox.colors.BLUE + this.productoActual.nombre);
-      //this.productos.push(this.productoActual);
-      let detalle : Detalle = new Detalle();
-      //despues hacer que esto en el back busque el id no el codigo
-      detalle.codigoProducto = this.productoActual.idProducto;
-      //cambiar a descripcion producto
-      detalle.descripcionDetalle = this.productoActual.descripcion;
-      detalle.cantidad = 1;
-      //hacer un id detalle y un num Detalle
-      detalle.numDetalle = this.contador++;
-      //no se si hara falta un precio y valor final
-      //por impuestos y eso
-      console.log(this.productoActual.precio);
-      detalle.valorProductos = this.productoActual.precio;
-      this.detalles.push(detalle);
-      this.calcularTotal();
-      this.productoActual = new Productos();  // Limpiar el producto actual
+      if(!this.noRepetido(texto)) {
+        toolbox.printf(toolbox.colors.BLUE + this.productoActual.nombre);
+        //this.productos.push(this.productoActual);
+        let detalle: Detalle = new Detalle();
+        //despues hacer que esto en el back busque el id no el codigo
+        detalle.codigoProducto = this.productoActual.idProducto;
+        //cambiar a descripcion producto
+        detalle.descripcionDetalle = this.productoActual.descripcion;
+        detalle.cantidad = 1;
+        //hacer un id detalle y un num Detalle
+        detalle.numDetalle = this.contador++;
+        //no se si hara falta un precio y valor final
+        //por impuestos y eso
+        console.log(this.productoActual.precio);
+        detalle.valorProductos = this.productoActual.precio;
+        this.detalles.push(detalle);
+        this.calcularTotal();
+        this.productoActual = new Productos();  // Limpiar el producto actual
+      }else{
+        this.error = 'Ya se ha agregado este producto';
+      }
     }else{
       this.error = 'Debe ingresar un producto valido';
     }
@@ -201,11 +210,7 @@ export class FacturarComponent implements OnInit{
           this.generarFactura();
         }
       });
-
-
     }
-
-
   }
   generarFactura(){
     console.log("estoy en el submit");
@@ -239,4 +244,16 @@ export class FacturarComponent implements OnInit{
       }
     }
   }
+
+  private noRepetido(texto: string) {
+      // Busca en la lista de productos un producto con el mismo id o nombre
+      const detalle = this.detalles.find(p => p.codigoProducto.toString() === texto || this.buscarProductoPorNombre(texto).nombre === texto);
+
+      // Si encuentra un producto, retorna true. De lo contrario, retorna false.
+      return !!detalle;
+  }
+
 }
+
+
+

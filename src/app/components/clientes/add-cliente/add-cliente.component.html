@@ -91,7 +91,8 @@
                 id="telefono"
                 name="telefono"
                 [(ngModel)]="cliente.telefono"
-
+                minlength="8"
+                maxlength="8"
                 required
                 #telefono = "ngModel"
               >
@@ -102,6 +103,13 @@
                 <div *ngIf="telefono.errors['pattern']">
                   El teléfono solo puede contener números
                 </div>
+                <div *ngIf="telefono.errors['minlength']">
+                  El teléfono debe tener como minimo 8 digitos
+                </div>
+                <div *ngIf="telefono.errors['maxlength']">
+                  El teléfono debe tener como maximo 8 digitos
+                </div>
+
               </div>
             </div>
             <button type="submit" class="btn btn-primary mt-3" [disabled]="!clienteForm.form.valid">

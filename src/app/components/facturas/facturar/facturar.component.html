@@ -26,10 +26,10 @@
               </li>
               <li><hr class="dropdown-divider"></li>
             </ul>
-            <button type="button" class = "btn btn-outline-secondary "> L </button>
+
 
             <div class = "alert alert-danger" *ngIf="cliente.invalid && (cliente.dirty || cliente.touched)">
-              <div *ngIf="cliente.errors['required']">
+              <div class = "error" *ngIf="cliente.errors['required']">
                 El campo es requerido
               </div>
             </div>
@@ -57,7 +57,6 @@
              </li>
               <li><hr class="dropdown-divider"></li>
             </ul>
-            <button type="button" class = "btn btn-outline-secondary "> L </button>
             <button type="button" class="btn btn-outline-secondary"  (click)="agregarProducto(productoActual.nombre)"> + </button>
           </div>
 
