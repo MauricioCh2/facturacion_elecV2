@@ -88,7 +88,7 @@ export class FacturarComponent implements OnInit{
     if(texto !== ''){
       console.log("Buscando producto con texto: "+ texto);
        aux = this.productos.find(producto =>
-        producto.idProducto.toString().includes(texto) || producto.nombre.toString().includes(texto));
+        producto.idProducto.toString().toUpperCase().includes(texto.toUpperCase()) || producto.nombre.toString().toUpperCase().includes(texto.toUpperCase()));
        if(aux!== undefined){
           this.productoActual = aux;
           return true;
@@ -103,7 +103,7 @@ export class FacturarComponent implements OnInit{
     if(texto !== ''){
       console.log("Buscando cliente con texto: "+ texto);
       aux = this.clientes.find(cliente =>
-        cliente.identificacionC.toString().includes(texto) || cliente.nombreC.toString().includes(texto));
+        cliente.identificacionC.toString().toUpperCase().includes(texto.toUpperCase()) || cliente.nombreC.toString().toUpperCase().includes(texto.toUpperCase()));
       if(aux!== undefined){
         return true;
       }

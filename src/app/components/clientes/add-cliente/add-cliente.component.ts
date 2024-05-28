@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
   styleUrl: './add-cliente.component.css'
 })
 export class AddClienteComponent implements OnInit{
+  clientes: Cliente[] = [];
   cliente = new Cliente();
   protected error: string;
   constructor(private usuarioService: UsuarioService, private router:Router, private currentUser: CurrentUserService){
@@ -19,37 +20,43 @@ export class AddClienteComponent implements OnInit{
   }
 
 onSubmit(){
-  const userId = this.currentUser.getCurrentUser().idUsuario;
-  this.unformatCedula();
+    if(this.currentUser.getID()==this.cliente.identificacionC){
+      this.error = 'Error el cliente no puede ser el mismo proveedor' ;
+    }
+  if(this.existeCliente(this.cliente.identificacionC)){
+    this.error = 'Error este cliente ya existe en la lista del proveedor' ;
+  }else {
+    const userId = this.currentUser.getCurrentUser().idUsuario;
+    this.unformatCedula();
     this.usuarioService.addCliente(userId, this.cliente).subscribe(
-      data =>{
+      data => {
         Swal.fire({
           title: 'Cliente agregado',
           text: `Cliente ${this.cliente.nombreC} ha sido agregado con éxito`,
           icon: 'success',
         }).then((result) => {
-          if (result.value) {
-            this.router.navigate(['/clientes']);
+            if (result.value) {
+              this.router.navigate(['/clientes']);
+            }
           }
-        }
-      );
+        );
       },
-    error => {
-      // console.log(error);
-      // // Si hay un error, establece la variable de error
-      //   this.error = 'No se logro agregar el cliente !!!.';
-      Swal.fire({
-        title: 'Error',
-        text: `Cliente ${this.cliente.nombreC} no se ha podido agregar`,
-        icon: 'error',
-      }).then((result) => {
-        if (result.value) {
-          // this.router.navigate(['/clientes']);
-        }
-      } );
-    }
-  );
-
+      error => {
+        // console.log(error);
+        // // Si hay un error, establece la variable de error
+        //   this.error = 'No se logro agregar el cliente !!!.';
+        Swal.fire({
+          title: 'Error',
+          text: `Cliente ${this.cliente.nombreC} no se ha podido agregar Error: ` + error.error.message,
+          icon: 'error',
+        }).then((result) => {
+          if (result.value) {
+            // this.router.navigate(['/clientes']);
+          }
+        });
+      }
+    );
+  }
 }
   formatCedula(event: any) {
     let value = event.target.value.replace(/\D/g, '');
@@ -65,4 +72,8 @@ onSubmit(){
     this.cliente.identificacionC = this.cliente.identificacionC.replace(/-/g, '');
   }
 
+  private existeCliente(identificacionC: string) {
+    const cliente = this.clientes.find(cli => cli.identificacionC.toUpperCase().includes(identificacionC.toUpperCase()));
+    return !!cliente;
+  }
 }
